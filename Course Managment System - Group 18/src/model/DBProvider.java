@@ -28,7 +28,11 @@ public class DBProvider {
 	}
 	private IDBConnection connection;
 	
-	public IDBConnection GetConnection() {
-		
+	public IDBConnection GetConnection() throws InitException {
+		if (connection.equals(null)) {
+			throw new InitException(EInitExceptionCodes.NOT_INIT);
+		} else {
+			return connection;
+		}
 	}
 }
