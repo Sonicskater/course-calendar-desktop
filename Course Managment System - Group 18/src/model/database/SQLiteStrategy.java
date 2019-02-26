@@ -1,4 +1,4 @@
-package model;
+package model.database;
 
 //THIS STAYS FINAL AND NOT PUBLIC
 final class SQLiteStrategy implements IDBConnection {
