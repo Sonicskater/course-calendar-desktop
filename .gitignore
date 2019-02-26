@@ -72,4 +72,8 @@ local.properties
 
 .sts4-cache/
 
+#gradle
+.gradle
+*/build/
+
 # End of https://www.gitignore.io/api/eclipse
