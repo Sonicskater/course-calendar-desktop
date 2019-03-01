@@ -1,4 +1,4 @@
-package model.database;
+package main.model.database;
 
 public class InitException extends Exception {
 

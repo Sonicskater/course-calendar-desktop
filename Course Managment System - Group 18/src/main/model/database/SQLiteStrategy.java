@@ -1,7 +1,6 @@
-package model.database;
+package main.model.database;
 
-import model.types.Department;
-import java.sql.*;
+import main.model.types.Department;
 
 //THIS STAYS FINAL AND NOT PUBLIC
 final class SQLiteStrategy implements IDBConnection {

@@ -1,6 +1,6 @@
-package model.database;
+package main.model.database;
 
-import model.types.Department;
+import main.model.types.Department;
 
 public interface IDBConnection {
 	//Define functions for controllers here

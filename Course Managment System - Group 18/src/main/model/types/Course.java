@@ -1,17 +1,23 @@
-package model.types;
-
+package main.model.types;
 import java.util.ArrayList;
 
-import model.database.DBProvider;
-import model.database.InitException;
+import main.model.database.DBData;
+import main.model.database.DBProvider;
+import main.model.database.DBUniqueID;
+import main.model.database.IDTypeMismatchExcception;
+import main.model.database.InitException;
 
-public class Course {
+public class Course extends DBData {
 	public ArrayList<Course> prereqs = new ArrayList<Course>();
 	public ArrayList<Course> antireqs = new ArrayList<Course>();
 	
 	private int courseNumber;
 	private String departmentCode;
 	private String departmentID;
+	
+	public Course(DBUniqueID id) throws IDTypeMismatchExcception {
+		super(id,"COURSE");
+	}
 	
 	public Department Department() throws DataNotFoundException {
 		try {

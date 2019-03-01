@@ -12,6 +12,20 @@ buildscript {
 apply plugin: "net.ltgt.apt-eclipse"
 apply plugin: 'java-library'
 
+sourceSets {
+    main {
+         java {
+            srcDirs = ['src']
+         }
+    }
+
+    test {
+        java {
+            srcDirs = ['test']
+        }
+    }
+}
+
 //define a jar to build
 jar{
 	baseName = "com.group18.cms"
