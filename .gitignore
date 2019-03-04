@@ -77,7 +77,11 @@ local.properties
 */build/
 
 # End of https://www.gitignore.io/api/eclipse
-Course Managment System - Group 18/.idea/
-Course Managment System - Group 18/gradlew.bat
-Course Managment System - Group 18/gradlew
-Course Managment System - Group 18/gradle/
+
+# Idea data
+.idea/
+
+# gradle cache
+gradlew.bat
+gradlew
+gradle/
