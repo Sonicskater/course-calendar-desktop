@@ -1,4 +1,4 @@
-package main.controller;
+package view;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,11 +10,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import main.model.database.DBUniqueID;
-import main.model.types.Department;
-import main.model.types.Program;
+import model.database.DBUniqueID;
+import model.types.Department;
+import model.types.Program;
 
 public class DummyClass implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4064740008720574220L;
 	public boolean on = true;
 	String[] hold;
 	ArrayList <Department> DepartmentList;

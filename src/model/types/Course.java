@@ -1,11 +1,11 @@
-package main.model.types;
+package model.types;
 import java.util.ArrayList;
 
-import main.model.database.DBData;
-import main.model.database.DBProvider;
-import main.model.database.DBUniqueID;
-import main.model.database.IDTypeMismatchExcception;
-import main.model.database.InitException;
+import model.database.DBData;
+import model.database.DBProvider;
+import model.database.DBUniqueID;
+import model.database.IDTypeMismatchExcception;
+import model.database.InitException;
 
 public class Course extends DBData {
 	public ArrayList<Course> prereqs = new ArrayList<Course>();

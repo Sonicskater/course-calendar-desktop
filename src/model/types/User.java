@@ -1,8 +1,8 @@
-package main.model.types;
+package model.types;
 
-import main.model.database.DBData;
-import main.model.database.DBUniqueID;
-import main.model.database.IDTypeMismatchExcception;
+import model.database.DBData;
+import model.database.DBUniqueID;
+import model.database.IDTypeMismatchExcception;
 
 public class User extends DBData {
 

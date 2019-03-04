@@ -1,4 +1,4 @@
-package main.model.types;
+package model.types;
 
 public class DataNotFoundException extends Exception {
 
