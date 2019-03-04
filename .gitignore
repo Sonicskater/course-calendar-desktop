@@ -80,6 +80,7 @@ local.properties
 
 # Idea data
 .idea/
+*.iml
 
 # gradle cache
 gradlew.bat
