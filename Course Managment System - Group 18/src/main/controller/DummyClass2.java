@@ -1,4 +1,4 @@
-package main.view;
-public class DummyClass {
+package main.controller;
+public class DummyClass2 {
 
 }

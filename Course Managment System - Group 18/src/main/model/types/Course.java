@@ -13,13 +13,13 @@ public class Course extends DBData {
 	
 	private int courseNumber;
 	private String departmentCode;
-	private String departmentID;
+	private DBUniqueID departmentID;
 	
 	public Course(DBUniqueID id) throws IDTypeMismatchExcception {
-		super(id,"COURSE");
+		super(id,"Course");
 	}
 	
-	public Department Department() throws DataNotFoundException {
+	public Department Department() throws DataNotFoundException, IDTypeMismatchExcception {
 		try {
 			return DBProvider.Instance().GetConnection().GetDepFromCode(departmentID);
 		} catch (InitException e) {
