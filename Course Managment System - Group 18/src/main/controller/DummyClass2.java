@@ -1,4 +1,4 @@
-package main.controller;
+package main.view;
 public class DummyClass {
 
 }
