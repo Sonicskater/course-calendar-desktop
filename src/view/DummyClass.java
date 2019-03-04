@@ -23,7 +23,10 @@ public class DummyClass implements Serializable {
 	String[] hold;
 	ArrayList <Department> DepartmentList;
 	ArrayList <Program> ProgramList;
-	public void main(String[] args){
+	public static void main(String[] args){
+	    new DummyClass().main2(args);
+    }
+	public void main2(String[] args){
 		try{
 			ObjectInputStream fIn = new ObjectInputStream(new FileInputStream("Save"));
 			DummyClass save = (DummyClass) fIn.readObject();

@@ -60,4 +60,7 @@ compileTestKotlin {
 jar{
     baseName = "com.group18.cms"
     version = "0.0.1"
+    manifest {
+        attributes 'Main-Class': 'view.DummyClass'
+    }
 }
