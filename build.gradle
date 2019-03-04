@@ -1,4 +1,5 @@
 buildscript {
+
   repositories {
     maven {
       url "https://plugins.gradle.org/m2/"
@@ -7,6 +8,9 @@ buildscript {
   dependencies {
     classpath "net.ltgt.gradle:gradle-apt-plugin:0.13"
   }
+}
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.21'
 }
 
 apply plugin: "net.ltgt.apt-eclipse"
@@ -27,10 +31,7 @@ sourceSets {
 }
 
 //define a jar to build
-jar{
-	baseName = "com.group18.cms"
-	version = "0.0.1"
-}
+
 
 repositories {
     // Use jcenter for resolving your dependencies.
@@ -43,4 +44,20 @@ dependencies {
 	implementation 'org.xerial:sqlite-jdbc:3.7.2'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+jar{
+    baseName = "com.group18.cms"
+    version = "0.0.1"
 }
