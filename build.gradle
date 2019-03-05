@@ -17,11 +17,13 @@ apply plugin: "net.ltgt.apt-eclipse"
 apply plugin: 'java-library'
 
 sourceSets {
-    main.kotlin.srcDirs = ['src']
-    main.java.srcDirs = ['src']
+    main.kotlin.srcDirs = ['src/main']
+    main.java.srcDirs = ['src/main']
+    main.resources.srcDirs = ['src/main/resources']
 
-    test.kotlin.srcDirs = ['./test']
-    test.java.srcDirs = ['./test']
+    test.kotlin.srcDirs = ['src/test']
+    test.java.srcDirs = ['src/test']
+    test.resources.srcDirs = ['src/test/resources']
 }
 
 //define a jar to build
