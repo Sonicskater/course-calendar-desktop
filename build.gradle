@@ -17,17 +17,11 @@ apply plugin: "net.ltgt.apt-eclipse"
 apply plugin: 'java-library'
 
 sourceSets {
-    main {
-         java {
-            srcDirs = ['src']
-         }
-    }
+    main.kotlin.srcDirs = ['src']
+    main.java.srcDirs = ['src']
 
-    test {
-        java {
-            srcDirs = ['test']
-        }
-    }
+    test.kotlin.srcDirs = ['./test']
+    test.java.srcDirs = ['./test']
 }
 
 //define a jar to build
@@ -40,7 +34,7 @@ repositories {
 }
 
 dependencies {
-	//define any external loibraries needed
+	//define any external libraries needed
 	implementation 'org.xerial:sqlite-jdbc:3.7.2'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
