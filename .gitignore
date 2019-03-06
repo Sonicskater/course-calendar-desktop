@@ -78,9 +78,12 @@ local.properties
 
 # End of https://www.gitignore.io/api/eclipse
 
-# Idea data
-.idea/
+### IntelliJ IDEA ###
+.idea
+*.iws
 *.iml
+*.ipr
+/out/
 
 # gradle cache
 gradlew.bat
