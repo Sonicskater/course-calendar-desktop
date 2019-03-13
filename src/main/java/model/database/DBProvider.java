@@ -8,7 +8,7 @@ public class DBProvider {
 	
 	//Make provider Singleton.
 	private static DBProvider instance;
-	public static DBProvider Instance() {
+	static DBProvider Instance() {
 		if (instance.equals(null)){
 			instance = new DBProvider();
 		}
