@@ -1,5 +1,6 @@
 package model.database
 
+import model.types.*
 import java.util.HashMap
 
 object DBCache {
@@ -10,10 +11,33 @@ object DBCache {
     }
 
     @Throws(InitException::class)
-    fun <T : DBData> GetData(id: DBUniqueID): T {
+    private inline fun <reified T : DBData> GetData(id: DBUniqueID): T {
         if (isNotCached(id)) {
             cache[id] = DBProvider.Instance().GetConnection().GetDataFromCode(id)
         }
-        return cache[id] as T
+        val data = cache[id]
+        if (data is T){
+            return cache[id] as T
+        }
+        else{
+            throw IDTypeMismatchExcception()
+        }
+
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    public fun GetCourse(id: DBUniqueID) : Course{
+        return GetData(id)
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    fun GetDepartment(id: DBUniqueID) : Department{
+        return GetData(id)
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    fun GetProgram(id: DBUniqueID) : Program{
+        return GetData(id)
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    fun GetUser(id: DBUniqueID) : User{
+        return GetData(id)
     }
 }
