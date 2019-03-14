@@ -17,7 +17,7 @@ apply plugin: "net.ltgt.apt-eclipse"
 apply plugin: 'java-library'
 apply plugin: 'application'
 
-mainClassName = "controller.CacheTestClass"
+mainClassName = "view.DummyClass"
 
 sourceSets {
     main.kotlin.srcDirs = ['src/main/kotlin','src/main/java']
@@ -60,10 +60,10 @@ jar{
     baseName = "com.group18.cms"
     version = "0.0.2"
     manifest {
-        attributes 'Main-Class': 'controller.CacheTestClass'
+        attributes 'Main-Class': 'view.DummyClass'
     }
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion="4.1"
+    gradleVersion="4.8"
 }

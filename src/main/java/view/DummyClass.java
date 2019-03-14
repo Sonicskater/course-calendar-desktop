@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import model.database.DBUniqueID;
+import model.database.EDBTypeCode;
 import model.types.Department;
 import model.types.Program;
 
@@ -198,14 +199,14 @@ public class DummyClass implements Serializable {
 				System.out.println("Enter Name/id of new department");
 				input = scan.next();
 				hold = input.split("/");
-				DBUniqueID newId = new DBUniqueID();
+				DBUniqueID newId = new DBUniqueID(EDBTypeCode.DEP,1);
 				try{
-				newId.setTypeCode("Department");
 				newId.setNumCode(Integer.parseInt(hold[1]));
-				Department d = new Department(newId, hold[0]);
+				Department d = new Department(newId);
+				d.setDeparmentName(hold[0]);
 				deparments.add(d);
 				} catch (Exception e){
-					System.out.println("Invalid input");
+					System.out.println(e);
 				}
 				break;
 			case 5:
@@ -213,11 +214,11 @@ public class DummyClass implements Serializable {
 				System.out.println("Enter Name/id of new program");
 				input = scan.next();
 				hold = input.split("/");
-				DBUniqueID newId2 = new DBUniqueID();
+				DBUniqueID newId2 = new DBUniqueID(EDBTypeCode.PROGRAM,1);
 				try{
-				newId2.setTypeCode("Program");
 				newId2.setNumCode(Integer.parseInt(hold[1]));
-				Program p = new Program(newId2, hold[0]);
+				Program p = new Program(newId2);
+				p.setProgramName(hold[0]);
 				programs.add(p);
 				} catch (Exception e){
 					System.out.println("Invalid input");

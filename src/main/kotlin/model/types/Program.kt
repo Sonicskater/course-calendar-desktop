@@ -6,5 +6,6 @@ import model.database.EDBTypeCode
 import model.database.IDTypeMismatchExcception
 
 class Program @Throws(IDTypeMismatchExcception::class)
-constructor(id: DBUniqueID)// TODO Auto-generated constructor stub
-    : DBData(id, EDBTypeCode.PROGRAM)
+constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.PROGRAM){
+    var programName = ""
+}

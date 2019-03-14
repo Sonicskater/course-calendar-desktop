@@ -1,0 +1,41 @@
+image: gradle:alpine
+
+stages:
+  - install-dependencies
+  - build
+  - test
+  - jar
+before_script:
+  - export GRADLE_USER_HOME = 'pwd'/.gradle
+cache:
+  paths:
+    - .gradle/wrapper
+    - .gradle/caches
+
+install-dependencies:
+  stage: install-dependencies
+  script:
+    - ./gradlew --refresh-dependencies
+
+build:
+  stage: build
+  script: ./gradlew build
+  cache:
+    paths:
+      - build
+      - .gradle
+
+test:
+  stage: test
+  script: ./gradlew check
+  cache:
+    paths:
+      - build
+      - .gradle
+
+jar:
+  stage: jar
+  script: ./gradlew jar
+  artifacts:
+    paths:
+      - build/libs
