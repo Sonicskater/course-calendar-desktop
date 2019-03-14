@@ -1,17 +1,13 @@
 package controller;
 import model.database.DataBase;
 import model.database.DBUniqueID;
+import model.database.EDBTypeCode;
 
 public class CacheTestClass {
 
 
-    public static void main(){
-        DataBase cache = DataBase.INSTANCE;
-        try {
-            cache.getCourse(new DBUniqueID());
-        }catch (Exception e){
-
-        }
+    public static void main(String[] args){
+        System.out.println("AAAAAAAA");
     }
 
 }

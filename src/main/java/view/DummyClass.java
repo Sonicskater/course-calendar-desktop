@@ -200,8 +200,8 @@ public class DummyClass implements Serializable {
 				hold = input.split("/");
 				DBUniqueID newId = new DBUniqueID();
 				try{
-				newId.TypeCode = "Department";
-				newId.NumCode = Integer.parseInt(hold[1]);
+				newId.setTypeCode("Department");
+				newId.setNumCode(Integer.parseInt(hold[1]));
 				Department d = new Department(newId, hold[0]);
 				deparments.add(d);
 				} catch (Exception e){
@@ -215,8 +215,8 @@ public class DummyClass implements Serializable {
 				hold = input.split("/");
 				DBUniqueID newId2 = new DBUniqueID();
 				try{
-				newId2.TypeCode = "Program";
-				newId2.NumCode = Integer.parseInt(hold[1]);
+				newId2.setTypeCode("Program");
+				newId2.setNumCode(Integer.parseInt(hold[1]));
 				Program p = new Program(newId2, hold[0]);
 				programs.add(p);
 				} catch (Exception e){

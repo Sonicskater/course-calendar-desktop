@@ -10,46 +10,36 @@ import java.lang.reflect.Type;
 public interface IDBConnection {
 	//Define functions for controllers here
 
-	//Creates a unique primary key number for the type requested
-	<T extends DBData> DBUniqueID InitData();
-	//Required methods
-	DBData GetDataFromCode(DBUniqueID code);
+	default DBData GetDataFromCode(DBUniqueID id) throws IDTypeMismatchExcception{
+		switch (id.getTypeCode()){
+			case COURSE: return GetCourseFromCode(id);
+			case DEP: return GetDepFromCode(id);
+			case USER: return GetUserFromCode(id);
+			case PROGRAM: return GetProgramFromCode(id);
+			default: throw new IDTypeMismatchExcception();
+		}
+	}
 
-	void WriteData(DBData Data);
+	//Creates a unique primary key number for the type requested
+	DBUniqueID InitData(EDBTypeCode code);
 
 	//Default methods that should be overridden if type-specific functionality is needed.
 	//Please overwrite instead of using switch statements.
-	default Department GetDepFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
-		if (code.TypeCode.equals("Department")) {
-			return (Department)GetDataFromCode(code);
-		}else {
-			throw new IDTypeMismatchExcception();
-		}
-	}
+	Department GetDepFromCode(DBUniqueID code) throws IDTypeMismatchExcception;
 
-	default Course GetCourseFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
-		if (code.TypeCode.equals("Course")) {
-			return (Course)GetDataFromCode(code);
-		}else {
-			throw new IDTypeMismatchExcception();
-		}
-	}
+	Course GetCourseFromCode(DBUniqueID code) throws IDTypeMismatchExcception;
 
-	default Program GetProgramFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
-		if (code.TypeCode.equals("Program")) {
-			return (Program)GetDataFromCode(code);
-		}else {
-			throw new IDTypeMismatchExcception();
-		}
-	}
+	Program GetProgramFromCode(DBUniqueID code) throws IDTypeMismatchExcception;
 
-	default User GetUserFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
-		if (code.TypeCode.equals("User")) {
-			return (User)GetDataFromCode(code);
-		}else {
-			throw new IDTypeMismatchExcception();
-		}
-	}
+	User GetUserFromCode(DBUniqueID code) throws IDTypeMismatchExcception;
+
+	void SetDepFromCode(DBUniqueID code, Department department) throws DBExcception;
+
+	void SetCourseFromCode(DBUniqueID code, Course course) throws DBExcception;
+
+	void SetProgramFromCode(DBUniqueID code, Program program) throws DBExcception;
+
+	void SetUserFromCode(DBUniqueID code, User user) throws DBExcception;
 
 
 

@@ -1,16 +1,16 @@
 package model.types
 
 import model.database.*
-import java.util.ArrayList
+import java.util.*
 
 class Course @Throws(IDTypeMismatchExcception::class)
-constructor(id: DBUniqueID) : DBData(id, "Course") {
-    var prereqs = ArrayList<Course>()
-    var antireqs = ArrayList<Course>()
-
-    private val courseNumber: Int = 0
-    private val departmentCode: String? = null
-    private val departmentID: DBUniqueID? = null
+constructor(id: DBUniqueID,
+            val departmentCode : String,
+            val courseNumber : Int,
+            val departmentID : DBUniqueID) : DBData(id, EDBTypeCode.COURSE)
+{
+    private var prereqs = ArrayList<DBUniqueID>()
+    private var antireqs = ArrayList<DBUniqueID>()
 
     @Throws(DataNotFoundException::class, IDTypeMismatchExcception::class)
     fun Department(): Department {
@@ -22,7 +22,24 @@ constructor(id: DBUniqueID) : DBData(id, "Course") {
 
     }
 
-    fun Title(): String {
+    fun addPreReq(id : DBUniqueID){
+        if (id.checkType(EDBTypeCode.COURSE) && !(id in prereqs)) {
+            prereqs.add(id)
+        }
+    }
+    fun addAntiReq(id : DBUniqueID){
+        if (id.checkType(EDBTypeCode.COURSE) && !(id in antireqs)) {
+            antireqs.add(id)
+        }
+    }
+    fun getAntiReqs() = Collections.unmodifiableList(antireqs)
+
+    fun getPreReqs() = Collections.unmodifiableList(prereqs)
+
+
+
+
+    fun title(): String {
         return "$departmentCode $courseNumber"
     }
 }

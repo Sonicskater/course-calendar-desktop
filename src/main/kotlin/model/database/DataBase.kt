@@ -53,26 +53,4 @@ object DataBase {
     fun getUser(id: DBUniqueID) : User{
         return getDataCached(id)
     }
-
-    private inline fun <reified T : DBData> setDataCached(id: DBUniqueID = DBProvider.connection.InitData<T>()){
-
-    }
-
-    @Throws(IDTypeMismatchExcception::class)
-    fun setUser(id: DBUniqueID = DBProvider.connection.InitData<User>()){
-        setDataCached<User>(id)
-    }
-    @Throws(IDTypeMismatchExcception::class)
-    fun setDepartment(id: DBUniqueID = DBProvider.connection.InitData<Department>()){
-        setDataCached<Department>(id)
-    }
-    @Throws(IDTypeMismatchExcception::class)
-    fun setProgram(id: DBUniqueID = DBProvider.connection.InitData<Program>()){
-        setDataCached<Program>(id)
-    }
-    @Throws(IDTypeMismatchExcception::class)
-    fun setCourse(id: DBUniqueID = DBProvider.connection.InitData<Course>()){
-        setDataCached<Course>(id)
-    }
-
 }
