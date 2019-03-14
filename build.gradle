@@ -14,9 +14,11 @@ plugins {
 }
 
 apply plugin: "net.ltgt.apt-eclipse"
-apply plugin: 'java-library'
+apply plugin: 'java'
 apply plugin: 'application'
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 mainClassName = "view.DummyClass"
 
 sourceSets {
@@ -36,14 +38,17 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenCentral()
 }
 
 dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 	//define any external libraries needed
 	implementation 'org.xerial:sqlite-jdbc:3.7.2'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+
+
 }
 
 compileKotlin {
@@ -58,10 +63,13 @@ compileTestKotlin {
 }
 jar{
     baseName = "com.group18.cms"
-    version = "0.0.2"
+    version = "0.0.3"
     manifest {
         attributes 'Main-Class': 'view.DummyClass'
     }
+}
+test{
+    useJUnitPlatform()
 }
 
 task wrapper(type: Wrapper) {

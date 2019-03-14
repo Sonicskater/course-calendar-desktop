@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.database.DBProvider;
 import model.database.DBUniqueID;
+import model.database.EConnectionStrategies;
 import model.database.EDBTypeCode;
 import model.types.Department;
 import model.types.Program;
@@ -31,6 +33,7 @@ public class DummyClass implements Serializable {
 	
 	public void main2(String[] args){
 		initialize();
+		DBProvider.INSTANCE.init(EConnectionStrategies.SQLite);
 		
 		boolean authenticated = false;
 		int userType = -1;
@@ -206,7 +209,7 @@ public class DummyClass implements Serializable {
 				d.setDeparmentName(hold[0]);
 				deparments.add(d);
 				} catch (Exception e){
-					System.out.println(e);
+					e.printStackTrace();
 				}
 				break;
 			case 5:
@@ -221,7 +224,7 @@ public class DummyClass implements Serializable {
 				p.setProgramName(hold[0]);
 				programs.add(p);
 				} catch (Exception e){
-					System.out.println("Invalid input");
+					e.printStackTrace();
 				}
 				break;
 			case 6:

@@ -33,11 +33,14 @@ build:
 
 test:
   stage: test
-  script: ./gradlew check
+  script: ./gradlew test
   cache:
     paths:
       - build
       - .gradle
+  artifacts:
+    reports:
+      junit: build/test-results/test/TEST-*.xml
 
 jar:
   stage: jar
