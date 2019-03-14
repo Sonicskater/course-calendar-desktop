@@ -206,7 +206,7 @@ public class DummyClass implements Serializable {
 				d.setDeparmentName(hold[0]);
 				deparments.add(d);
 				} catch (Exception e){
-					System.out.println(e);
+					e.printStackTrace();
 				}
 				break;
 			case 5:
@@ -221,7 +221,7 @@ public class DummyClass implements Serializable {
 				p.setProgramName(hold[0]);
 				programs.add(p);
 				} catch (Exception e){
-					System.out.println("Invalid input");
+					e.printStackTrace();
 				}
 				break;
 			case 6:

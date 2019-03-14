@@ -63,6 +63,9 @@ jar{
         attributes 'Main-Class': 'view.DummyClass'
     }
 }
+test{
+    useJUnitPlatform()
+}
 
 task wrapper(type: Wrapper) {
     gradleVersion="4.8"
