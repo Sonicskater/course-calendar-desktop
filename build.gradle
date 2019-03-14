@@ -66,11 +66,9 @@ compileTestKotlin {
 }
 jar{
     baseName = "com.group18.cms"
-    version = "0.0.3"
-    manifest {
-        attributes 'Main-Class': 'view.DummyClass'
-    }
+    version = "0.0.4"
 }
+shadowJar.archiveName = 'com.group18.cms-0.0.4-shadow.jar'
 test{
     useJUnitPlatform()
 }

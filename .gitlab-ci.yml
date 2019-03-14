@@ -44,7 +44,9 @@ test:
 
 jar:
   stage: jar
-  script: ./gradlew shadowJar
+  script:
+    - ./gradlew shadowDistZip
+    - ./gradlew shadowDistTar
   artifacts:
     paths:
-      - build/libs
+      - build/distributions
