@@ -1,14 +1,14 @@
 package controller;
-import model.database.DBCache;
+import model.database.DataBase;
 import model.database.DBUniqueID;
-import model.types.*;
+
 public class CacheTestClass {
 
 
     public static void main(){
-        DBCache cache = DBCache.INSTANCE;
+        DataBase cache = DataBase.INSTANCE;
         try {
-            cache.GetCourse(new DBUniqueID());
+            cache.getCourse(new DBUniqueID());
         }catch (Exception e){
 
         }

@@ -5,6 +5,11 @@ import model.types.*;
 final class SQLiteStrategy implements IDBConnection {
 
 	@Override
+	public <T extends DBData> DBUniqueID InitData() {
+		return null;
+	}
+
+	@Override
 	public DBData GetDataFromCode(DBUniqueID code) {
 		// TODO Auto-generated method stub
 		return null;
@@ -16,11 +21,6 @@ final class SQLiteStrategy implements IDBConnection {
 		
 	}
 
-	@Override
-	public DBUniqueID InitData(String type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	
 
