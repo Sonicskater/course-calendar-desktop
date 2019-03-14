@@ -10,7 +10,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import model.database.DBProvider;
 import model.database.DBUniqueID;
+import model.database.EConnectionStrategies;
 import model.database.EDBTypeCode;
 import model.types.Department;
 import model.types.Program;
@@ -31,6 +33,7 @@ public class DummyClass implements Serializable {
 	
 	public void main2(String[] args){
 		initialize();
+		DBProvider.INSTANCE.init(EConnectionStrategies.SQLite);
 		
 		boolean authenticated = false;
 		int userType = -1;
