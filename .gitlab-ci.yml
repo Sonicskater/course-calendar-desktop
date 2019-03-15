@@ -18,12 +18,12 @@ cache:
     - .gradle/wrapper
     - .gradle/caches
 
-install-dependencies:
+Dependencies:
   stage: install-dependencies
   script:
     - ./gradlew --refresh-dependencies
 
-build:
+Build:
   stage: build
   script: ./gradlew build
   cache:
@@ -31,7 +31,7 @@ build:
       - build
       - .gradle
 
-test:
+Test:
   stage: test
   script: ./gradlew test
   cache:
@@ -42,11 +42,10 @@ test:
     reports:
       junit: build/test-results/test/TEST-*.xml
 
-jar:
+Java FX Build:
   stage: jar
   script:
-    - ./gradlew shadowDistZip
-    - ./gradlew shadowDistTar
+    - ./gradlew jfxJar
   artifacts:
     paths:
-      - build/distributions
+      - build/jfx

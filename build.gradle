@@ -4,21 +4,25 @@ buildscript {
     maven {
       url "https://plugins.gradle.org/m2/"
     }
+      mavenLocal()
+      mavenCentral()
   }
   dependencies {
-      classpath "net.ltgt.gradle:gradle-apt-plugin:0.13"
+      classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+      classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
       classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
   }
 
 }
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
-}
+    id 'net.ltgt.apt-eclipse' version '0.21'
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.1'
 
-apply plugin: "net.ltgt.apt-eclipse"
-apply plugin: 'java'
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
+}
+apply plugin: 'javafx-gradle-plugin'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -41,6 +45,7 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    mavenLocal()
     mavenCentral()
 }
 
@@ -51,6 +56,9 @@ dependencies {
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:1.3.21"
+
+    testCompile "org.testfx:testfx-core:4.0.+"
+    testCompile "org.testfx:testfx-junit:4.0.+"
 
 
 }
@@ -67,13 +75,24 @@ compileTestKotlin {
 }
 jar{
     baseName = "com.group18.cms"
-    version = "0.0.4"
+    version = "0.1.0"
 }
-shadowJar.archiveName = 'com.group18.cms-0.0.4-shadow.jar'
+shadowJar.archiveName = 'com.group18.cms-0.1.0-shadow.jar'
 test{
     useJUnit()
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion="4.8"
+}
+
+jfx {
+    // minimal requirement for jfxJar-task
+    mainClass = 'view.Main'
+
+    // minimal requirement for jfxNative-task
+    vendor = 'SENG-Group-18'
+
+
+    jfxMainAppJarName = "com.group18.cms-0.1.0-jfx.jar"
 }

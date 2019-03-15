@@ -10,13 +10,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
    <children>
       <PasswordField fx:id="passField" layoutX="77.0" layoutY="244.0" prefHeight="25.0" prefWidth="146.0" promptText="password" />
       <TextField fx:id="userField" layoutX="77.0" layoutY="210.0" prefHeight="25.0" prefWidth="146.0" promptText="Username" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="52.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../logo.png" />
+            <Image url="@../../java/view/logo.png" />
          </image>
       </ImageView>
       <Hyperlink accessibleText="https://webadv.uwinnipeg.ca/WebAdvisor/WebAdvisor?TOKENIDX=3863964859&amp;SS=2&amp;APP=ST&amp;CONSTITUENCY=XWMCS" layoutX="85.0" layoutY="363.0" text="Forgot your password?" />
