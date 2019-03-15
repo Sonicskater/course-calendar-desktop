@@ -80,7 +80,7 @@ public class LoginController implements Initializable {
             UserController control = loader.getController();
             control.setUserType(userType); // Pass data into userView
             Stage studentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            studentStage.setTitle("Uwinnipeg Course Manager");
+            studentStage.setTitle("UWinnipeg Course Manager");
             studentStage.setScene(newScene);
             studentStage.show();
         }
