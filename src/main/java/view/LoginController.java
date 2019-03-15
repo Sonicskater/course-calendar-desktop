@@ -1,4 +1,4 @@
-package view;
+package JavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,8 +18,11 @@ import java.util.ResourceBundle;
 
 
 public class LoginController implements Initializable {
-    static final int STUDENT = 0;
-    static final int FACULTY = 1;
+    private static final int STUDENT = 0;
+    private static final int FACULTY = 1;
+
+    private int userType = -1;
+    private String userTypeTitle;
 
     @FXML private TextField userField;
     @FXML private PasswordField passField;
@@ -30,9 +34,6 @@ public class LoginController implements Initializable {
 
     @FXML private Label badLogInLabel;
 
-    private int userType;
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // User Type toggle selection
@@ -40,7 +41,7 @@ public class LoginController implements Initializable {
         studentRButton.setToggleGroup(userTypeGroup);
         facultyRButton.setToggleGroup(userTypeGroup);
         // Student toggled as default
-        userTypeGroup.selectToggle(studentRButton);
+        userTypeGroup.selectToggle(facultyRButton);
 
         badLogInLabel.setVisible(false);
     }
@@ -50,9 +51,10 @@ public class LoginController implements Initializable {
             System.out.println("STUDENT LOGIN ATTEMPT (USER:" + userField.getText() + ", PASS:" + passField.getText() + ")");
 
             this.userType = STUDENT;
+            this.userTypeTitle = "UWinnipeg Course Lister (Student)";
 
             // Call faculty authentication method here
-            if (!userField.getText().equals(" ") || !passField.getText().equals("")) {
+            if (!userField.getText().equals("") || !passField.getText().equals("")) {
                 badLogInLabel.setVisible(true); // Display log in error message
             } else {
                 authenticated = true;
@@ -63,9 +65,10 @@ public class LoginController implements Initializable {
             System.out.println("FACULTY LOGIN ATTEMPT (USER: " + userField.getText() + ", PASS:" + passField.getText() + ")");
 
             this.userType = FACULTY;
+            this.userTypeTitle = "UWinnipeg Course Manager (Faculty)";
 
             // Call faculty authentication method here
-            if (!userField.getText().equals(" ") || !passField.getText().equals("")) {
+            if (!userField.getText().equals("") || !passField.getText().equals("")) {
                 badLogInLabel.setVisible(true); // Display log in error message
             } else {
                 authenticated = true;
@@ -74,15 +77,15 @@ public class LoginController implements Initializable {
 
         if (authenticated) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("interface/userView.fxml"));
+            loader.setLocation(getClass().getResource("userView.fxml"));
             Parent parent = loader.load();
             Scene newScene = new Scene(parent);
             UserController control = loader.getController();
             control.setUserType(userType); // Pass data into userView
-            Stage studentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            studentStage.setTitle("UWinnipeg Course Manager");
-            studentStage.setScene(newScene);
-            studentStage.show();
+            Stage userStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            userStage.setTitle(this.userTypeTitle);
+            userStage.setScene(newScene);
+            userStage.show();
         }
     }
 }
