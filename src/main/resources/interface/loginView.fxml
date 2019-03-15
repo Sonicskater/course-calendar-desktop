@@ -17,7 +17,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../java/view/logo.png" />
+                  <Image url="@../images/logo.png" />
                </image>
             </ImageView>
             <TextField fx:id="userField" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" promptText="Username" />
