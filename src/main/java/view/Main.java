@@ -1,4 +1,4 @@
-package view;
+package JavaFX;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,8 +10,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("interface/loginView.fxml"));
-        primaryStage.setTitle("uwinnipeg Authenticator");
+        Parent root = FXMLLoader.load(getClass().getResource("loginView.fxml"));
+        primaryStage.setTitle("UWinnipeg Authenticator");
         primaryStage.setScene(new Scene(root, 300, 400));
         primaryStage.show();
     }
