@@ -45,7 +45,6 @@ public class LoginController implements Initializable {
         badLogInLabel.setVisible(false);
     }
 
-    @FXML
     public void logIn(ActionEvent event) throws IOException {
         if (this.userTypeGroup.getSelectedToggle().equals(this.studentRButton)) {
             System.out.println("STUDENT LOGIN ATTEMPT (USER:" + userField.getText() + ", PASS:" + passField.getText() + ")");
