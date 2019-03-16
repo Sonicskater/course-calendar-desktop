@@ -5,6 +5,7 @@ import model.types.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 //THIS STAYS FINAL AND NOT PUBLIC
 final class SQLiteStrategy implements IDBConnection {
@@ -60,6 +61,26 @@ final class SQLiteStrategy implements IDBConnection {
 	@Override
 	public void SetUserFromCode(DBUniqueID code, User user) throws DBExcception {
 
+	}
+
+	@Override
+	public ArrayList<DBUniqueID> getAllUserIDs() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<DBUniqueID> getAllCourseIDs() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<DBUniqueID> getAllProgramIDs() {
+		return null;
+	}
+
+	@Override
+	public ArrayList<DBUniqueID> getAllDepartmentIDs() {
+		return null;
 	}
 
 

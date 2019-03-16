@@ -33,7 +33,7 @@ public class DummyClass implements Serializable {
 	
 	public void main2(String[] args){
 		initialize();
-		DBProvider.INSTANCE.init(EConnectionStrategies.SQLite);
+
 		
 		boolean authenticated = false;
 		int userType = -1;
@@ -202,7 +202,7 @@ public class DummyClass implements Serializable {
 				System.out.println("Enter Name/id of new department");
 				input = scan.next();
 				hold = input.split("/");
-				DBUniqueID newId = new DBUniqueID(EDBTypeCode.DEP,1);
+				DBUniqueID newId = new DBUniqueID(EDBTypeCode.DEPARTMENT,1);
 				try{
 				newId.setNumCode(Integer.parseInt(hold[1]));
 				Department d = new Department(newId);

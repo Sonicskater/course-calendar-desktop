@@ -7,7 +7,7 @@ import model.database.IDTypeMismatchExcception
 import java.util.*
 
 class Department @Throws(IDTypeMismatchExcception::class)
-constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.DEP) {
+constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.DEPARTMENT) {
 
     var name = ""
 

@@ -2,7 +2,7 @@ package model.database
 
 
 
-object DBProvider{
+internal object DBProvider{
     lateinit var strategy: EConnectionStrategies private set
 
     val connection: IDBConnection by lazy { openConnection()}

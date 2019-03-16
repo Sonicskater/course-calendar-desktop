@@ -2,7 +2,7 @@ package model.database
 
 enum class EDBTypeCode(val string: String) {
     COURSE("Course"),
-    DEP("Department"),
+    DEPARTMENT("Department"),
     USER("User"),
     PROGRAM("Program")
 

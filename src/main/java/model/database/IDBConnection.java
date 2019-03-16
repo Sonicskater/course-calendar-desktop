@@ -5,7 +5,7 @@ import model.types.Department;
 import model.types.Program;
 import model.types.User;
 
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 public interface IDBConnection {
 	//Define functions for controllers here
@@ -13,7 +13,7 @@ public interface IDBConnection {
 	default DBData GetDataFromCode(DBUniqueID id) throws IDTypeMismatchExcception{
 		switch (id.getTypeCode()){
 			case COURSE: return GetCourseFromCode(id);
-			case DEP: return GetDepFromCode(id);
+			case DEPARTMENT: return GetDepFromCode(id);
 			case USER: return GetUserFromCode(id);
 			case PROGRAM: return GetProgramFromCode(id);
 			default: throw new IDTypeMismatchExcception();
@@ -40,6 +40,11 @@ public interface IDBConnection {
 	void SetProgramFromCode(DBUniqueID code, Program program) throws DBExcception;
 
 	void SetUserFromCode(DBUniqueID code, User user) throws DBExcception;
+
+	ArrayList<DBUniqueID> getAllUserIDs();
+	ArrayList<DBUniqueID> getAllCourseIDs();
+	ArrayList<DBUniqueID> getAllProgramIDs();
+	ArrayList<DBUniqueID> getAllDepartmentIDs();
 
 
 

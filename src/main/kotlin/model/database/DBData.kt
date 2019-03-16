@@ -18,7 +18,7 @@ constructor(id: DBUniqueID, type: EDBTypeCode) {
         try {
             when(this.id.TypeCode){
                 EDBTypeCode.COURSE -> DBProvider.connection.SetCourseFromCode(this.id,this as Course)
-                EDBTypeCode.DEP -> DBProvider.connection.SetDepFromCode(this.id,this as Department)
+                EDBTypeCode.DEPARTMENT -> DBProvider.connection.SetDepFromCode(this.id,this as Department)
                 EDBTypeCode.USER -> DBProvider.connection.SetUserFromCode(this.id,this as User)
                 EDBTypeCode.PROGRAM -> DBProvider.connection.SetProgramFromCode(this.id,this as Program)
             }

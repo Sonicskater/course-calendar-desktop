@@ -35,6 +35,7 @@ object DataBase {
         }
 
     }
+
 	//These are needed to expose above function to java as java can't call inline functions.
 	//Allows for sharing of logic while also keeping interface simple (no need to pass special Class objects to cast types correctly).
     @Throws(IDTypeMismatchExcception::class)
@@ -53,4 +54,22 @@ object DataBase {
     fun getUser(id: DBUniqueID) : User{
         return getDataCached(id)
     }
+
+    @Throws(IDTypeMismatchExcception::class)
+    fun getUserIDs() : List<DBUniqueID>{
+        return DBProvider.connection.getAllUserIDs()
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    fun getProgramIDs() : List<DBUniqueID>{
+        return DBProvider.connection.getAllProgramIDs()
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    fun getCourseIDs() : List<DBUniqueID>{
+        return DBProvider.connection.getAllCourseIDs()
+    }
+    @Throws(IDTypeMismatchExcception::class)
+    fun getDepartmentIDs() : List<DBUniqueID>{
+        return DBProvider.connection.getAllDepartmentIDs()
+    }
+
 }
