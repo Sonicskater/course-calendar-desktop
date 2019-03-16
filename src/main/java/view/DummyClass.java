@@ -206,7 +206,7 @@ public class DummyClass implements Serializable {
 				try{
 				newId.setNumCode(Integer.parseInt(hold[1]));
 				Department d = new Department(newId);
-				d.setDeparmentName(hold[0]);
+				d.setName(hold[0]);
 				deparments.add(d);
 				} catch (Exception e){
 					e.printStackTrace();
@@ -221,7 +221,7 @@ public class DummyClass implements Serializable {
 				try{
 				newId2.setNumCode(Integer.parseInt(hold[1]));
 				Program p = new Program(newId2);
-				p.setProgramName(hold[0]);
+				p.setName(hold[0]);
 				programs.add(p);
 				} catch (Exception e){
 					e.printStackTrace();
