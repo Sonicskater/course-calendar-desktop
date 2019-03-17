@@ -54,21 +54,25 @@ object DataBase {
         return getDataCached(id)
     }
 
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getUserIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllUserIDs()
     }
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getProgramIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllProgramIDs()
     }
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getCourseIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllCourseIDs()
     }
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getDepartmentIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllDepartmentIDs()
+    }
+
+    fun deleteFromID(id : DBUniqueID){
+        DBProvider.connection.DeleteFromCode(id)
     }
 
 }

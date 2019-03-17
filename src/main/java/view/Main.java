@@ -41,12 +41,20 @@ public class Main extends Application {
         c.setTitle("Test Course");
         c.setDepartmentID(new DBUniqueID(EDBTypeCode.DEPARTMENT));
         c.setDescription(" This is a course for testing the system.");
+        c.addPreReq(new DBUniqueID(EDBTypeCode.COURSE));
+        DBUniqueID id2 = new DBUniqueID(EDBTypeCode.COURSE);
+        id2.setNumCode(3);
+        c.addPreReq(id2);
         c.save();
         try {
-            System.out.println(DataBase.INSTANCE.getCourse(id).getTitle());
+            c = DataBase.INSTANCE.getCourse(id);
+            System.out.println(c.getTitle());
         }catch (Exception e){
             e.printStackTrace();
         }
+        System.out.println(DataBase.INSTANCE.getCourseIDs());
+
+        System.out.println(c.getPreReqs());
 
         launch(args);
     }

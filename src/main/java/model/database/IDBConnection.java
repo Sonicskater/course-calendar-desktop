@@ -36,13 +36,13 @@ public interface IDBConnection {
 
 	void DeleteFromCode(DBUniqueID code);
 
-	void SetDepFromCode(DBUniqueID code, Department department) throws DBExcception;
+	void SetDepFromCode(DBUniqueID code, Department department) throws IDTypeMismatchExcception;
 
-	void SetCourseFromCode(DBUniqueID code, Course course) throws DBExcception;
+	void SetCourseFromCode(DBUniqueID code, Course course) throws IDTypeMismatchExcception;
 
-	void SetProgramFromCode(DBUniqueID code, Program program) throws DBExcception;
+	void SetProgramFromCode(DBUniqueID code, Program program) throws IDTypeMismatchExcception;
 
-	void SetUserFromCode(DBUniqueID code, User user) throws DBExcception;
+	void SetUserFromCode(DBUniqueID code, User user) throws IDTypeMismatchExcception;
 
 	ArrayList<DBUniqueID> getAllUserIDs();
 	ArrayList<DBUniqueID> getAllCourseIDs();
