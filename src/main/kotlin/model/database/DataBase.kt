@@ -3,6 +3,19 @@ package model.database
 import model.types.*
 import java.util.HashMap
 
+
+/* ############ DATABASE INSTRUCTIONS ############
+
+- All interactions are done through this DataBase class, or through calling <object>.save() or <object>.delete().
+
+- Objects are only unique by the numerical value of their DBUniqueID, not by any other constraints. To get a new, unique one call getNewID on this class.
+
+- SQLite database must be initialized exactly ONCE by calling DBProvider.INSTANCE.init(EDBConnectionStrategies.SQLITE) (I've added this line to main)
+
+*/
+
+
+
 //Object instead of class implements singleton pattern boilerplate at compile time
 //use DataBase.INSTANCE instead of new DataBase();
 object DataBase {
@@ -73,6 +86,10 @@ object DataBase {
 
     fun deleteFromID(id : DBUniqueID){
         DBProvider.connection.DeleteFromCode(id)
+    }
+
+    fun getNewID(type : EDBTypeCode){
+        DBProvider.connection.GetNewKey(type)
     }
 
 }
