@@ -5,6 +5,7 @@ import model.types.Department;
 import model.types.Program;
 import model.types.User;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IDBConnection {
@@ -21,7 +22,7 @@ public interface IDBConnection {
 	}
 
 	//Creates a unique primary key number for the type requested
-	DBUniqueID InitData(EDBTypeCode code);
+	int GetNewKey(EDBTypeCode code) throws SQLException;
 
 	//Default methods that should be overridden if type-specific functionality is needed.
 	//Please overwrite instead of using switch statements.
@@ -32,6 +33,8 @@ public interface IDBConnection {
 	Program GetProgramFromCode(DBUniqueID code) throws IDTypeMismatchExcception;
 
 	User GetUserFromCode(DBUniqueID code) throws IDTypeMismatchExcception;
+
+	void DeleteFromCode(DBUniqueID code);
 
 	void SetDepFromCode(DBUniqueID code, Department department) throws DBExcception;
 

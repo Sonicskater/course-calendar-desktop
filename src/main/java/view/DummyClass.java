@@ -202,7 +202,7 @@ public class DummyClass implements Serializable {
 				System.out.println("Enter Name/id of new department");
 				input = scan.next();
 				hold = input.split("/");
-				DBUniqueID newId = new DBUniqueID(EDBTypeCode.DEPARTMENT,1);
+				DBUniqueID newId = new DBUniqueID(EDBTypeCode.DEPARTMENT);
 				try{
 				newId.setNumCode(Integer.parseInt(hold[1]));
 				Department d = new Department(newId);
@@ -217,7 +217,7 @@ public class DummyClass implements Serializable {
 				System.out.println("Enter Name/id of new program");
 				input = scan.next();
 				hold = input.split("/");
-				DBUniqueID newId2 = new DBUniqueID(EDBTypeCode.PROGRAM,1);
+				DBUniqueID newId2 = new DBUniqueID(EDBTypeCode.PROGRAM);
 				try{
 				newId2.setNumCode(Integer.parseInt(hold[1]));
 				Program p = new Program(newId2);

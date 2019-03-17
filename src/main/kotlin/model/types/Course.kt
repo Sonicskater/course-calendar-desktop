@@ -9,6 +9,7 @@ constructor(id: DBUniqueID,
             val number : Int,
             val departmentID : DBUniqueID) : DBData(id, EDBTypeCode.COURSE)
 {
+
     private var prereqs = ArrayList<DBUniqueID>()
     private var antireqs = ArrayList<DBUniqueID>()
 
@@ -33,6 +34,6 @@ constructor(id: DBUniqueID,
     fun title(): String {
         return "$code $number"
     }
-
+    var title = ""
     var description = ""
 }

@@ -4,6 +4,7 @@ import model.types.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -11,21 +12,67 @@ import java.util.ArrayList;
 final class SQLiteStrategy implements IDBConnection {
 	SQLiteStrategy(){
 		try{
-			String url = "test.db";
+			Class.forName("org.sqlite.JDBC");
+			String filename = "sqlite.db";
+
+			String url = "jdbc:sqlite:" + filename;
 			connection = DriverManager.getConnection(url);
+			System.out.println(connection.getMetaData().getDriverName() + "connection established to "+filename);
+
+			String sql = "CREATE TABLE IF NOT EXISTS courses (\n"
+					+ " id integer PRIMARY KEY, \n"
+					+ " code text,\n"
+					+ " number integer, \n"
+					+ " title text, \n"
+					+ " description text\n"
+					+");";
+			connection.createStatement().execute(sql);
+			sql = "CREATE TABLE IF NOT EXISTS departments (\n"
+					+ " id integer PRIMARY KEY, \n"
+					+ " name text \n"
+					+");";
+			connection.createStatement().execute(sql);
+			sql = "CREATE TABLE IF NOT EXISTS users (\n"
+					+ " id integer PRIMARY KEY, \n"
+					+ " user text, \n"
+					+ " pass text \n"
+					+");";
+			connection.createStatement().execute(sql);
+			sql = "CREATE TABLE IF NOT EXISTS programs (\n"
+					+ " id integer PRIMARY KEY, \n"
+					+ " name text, \n"
+					+ " description text \n"
+					+");";
+			connection.createStatement().execute(sql);
+
 		}catch (SQLException e){
-			System.exit(2);
+			e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			System.out.println("Driver not found");
 		}
 	}
-	private static Connection connection;
+	private Connection connection;
 	@Override
-	public DBUniqueID InitData(EDBTypeCode code) {
-		return null;
+	public int GetNewKey(EDBTypeCode code) throws SQLException{
+		String type = code.getString().toLowerCase()+"s";
+		ResultSet rs = connection.createStatement().executeQuery("SELECT IFNULL(MAX(id),0) as id FROM "+type);
+		return rs.getInt("id") + 1;
 	}
 
 	@Override
 	public Department GetDepFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
-		return null;
+		if (code.getTypeCode() != EDBTypeCode.DEPARTMENT){
+			throw new IDTypeMismatchExcception();
+		}
+		String sql = "SELECT id, name FROM departments WHERE id = " + code.getNumCode();
+		try {
+			ResultSet rs = connection.createStatement().executeQuery(sql);
+			Department dep = new Department(code);
+			dep.setName(rs.getString("name"));
+			return dep;
+		}catch(Exception e){
+			return null;
+		}
 	}
 
 	@Override
@@ -41,6 +88,11 @@ final class SQLiteStrategy implements IDBConnection {
 	@Override
 	public User GetUserFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
 		return null;
+	}
+
+	@Override
+	public void DeleteFromCode(DBUniqueID code) {
+
 	}
 
 	@Override

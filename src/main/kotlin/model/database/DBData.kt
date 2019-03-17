@@ -5,7 +5,7 @@ import java.lang.Exception
 
 abstract class DBData @Throws(IDTypeMismatchExcception::class)
 constructor(id: DBUniqueID, type: EDBTypeCode) {
-    var id: DBUniqueID = DBProvider.connection.InitData(type)
+    var id: DBUniqueID = DBUniqueID(type)
 
     init {
         if (id.TypeCode !== type) {

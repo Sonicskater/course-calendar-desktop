@@ -1,11 +1,7 @@
 package model.database
 
-import model.types.Course
-import java.lang.reflect.Type
-import kotlin.reflect.KClass
-
-class DBUniqueID(val TypeCode: EDBTypeCode, var NumCode: Int) {
-
+class DBUniqueID(val TypeCode: EDBTypeCode) {
+    var NumCode: Int = DBProvider.connection.GetNewKey(TypeCode)
 
 
     override fun toString(): String {
