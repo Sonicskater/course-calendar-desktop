@@ -14,7 +14,7 @@ internal object DBProvider{
             this.strategy = strat
         }
     }
-
+    @Throws()
     private fun openConnection() : IDBConnection{
         if (this::strategy.isInitialized) {
             return when (strategy) {

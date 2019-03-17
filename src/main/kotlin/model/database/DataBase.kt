@@ -3,17 +3,29 @@ package model.database
 import model.types.*
 import java.util.HashMap
 
+
+/* ############ DATABASE INSTRUCTIONS ############
+
+- All interactions are done through this DataBase class, or through calling <object>.save() or <object>.delete().
+
+- Objects are only unique by the numerical value of their DBUniqueID, not by any other constraints. To get a new, unique one call getNewID on this class.
+
+- SQLite database must be initialized exactly ONCE by calling DBProvider.INSTANCE.init(EDBConnectionStrategies.SQLITE) (I've added this line to main)
+
+*/
+
+
+
 //Object instead of class implements singleton pattern boilerplate at compile time
 //use DataBase.INSTANCE instead of new DataBase();
 object DataBase {
-    init {
-        DBProvider.init(EConnectionStrategies.SQLite)
-    }
     private val cache = HashMap<DBUniqueID, DBData>()
 
     //Extension methods
+
+    //Caching disabled for now
     private fun DBUniqueID.isNotCached(): Boolean {
-        return !cache.containsKey(this)
+        return true
     }
     private fun DBUniqueID.isCached(): Boolean{
         return cache.containsKey(this)
@@ -55,21 +67,29 @@ object DataBase {
         return getDataCached(id)
     }
 
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getUserIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllUserIDs()
     }
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getProgramIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllProgramIDs()
     }
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getCourseIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllCourseIDs()
     }
-    @Throws(IDTypeMismatchExcception::class)
+
     fun getDepartmentIDs() : List<DBUniqueID>{
         return DBProvider.connection.getAllDepartmentIDs()
+    }
+
+    fun deleteFromID(id : DBUniqueID){
+        DBProvider.connection.DeleteFromCode(id)
+    }
+
+    fun getNewID(type : EDBTypeCode){
+        DBProvider.connection.GetNewKey(type)
     }
 
 }

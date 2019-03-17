@@ -1,11 +1,12 @@
 package model.database
 
+import com.sun.org.apache.xpath.internal.operations.Bool
 import model.types.*
 import java.lang.Exception
 
 abstract class DBData @Throws(IDTypeMismatchExcception::class)
 constructor(id: DBUniqueID, type: EDBTypeCode) {
-    var id: DBUniqueID = DBProvider.connection.InitData(type)
+    var id: DBUniqueID = DBUniqueID(type)
 
     init {
         if (id.TypeCode !== type) {
@@ -23,6 +24,14 @@ constructor(id: DBUniqueID, type: EDBTypeCode) {
                 EDBTypeCode.PROGRAM -> DBProvider.connection.SetProgramFromCode(this.id,this as Program)
             }
         }catch (e :Exception){
+            return false
+        }
+        return true
+    }
+    fun delete() : Boolean{
+        try {
+            DataBase.deleteFromID(this.id)
+        }catch (e: Exception){
             return false
         }
         return true
