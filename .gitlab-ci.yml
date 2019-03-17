@@ -42,10 +42,10 @@ Test:
     reports:
       junit: build/test-results/test/TEST-*.xml
 
-Java FX Build:
+Java FX Distributions:
   stage: jar
   script:
-    - ./gradlew jfxJar
+    - ./gradlew build
   artifacts:
     paths:
-      - build/jfx
+      - build/distributions

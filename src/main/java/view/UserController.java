@@ -69,7 +69,7 @@ public class UserController implements Initializable {
     }
 
     public void logOut(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("../../resources/interface/loginView.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("interface/loginView.fxml"));
         Scene newScene = new Scene(parent);
         Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         loginStage.setScene(newScene);
