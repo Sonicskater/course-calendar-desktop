@@ -2,10 +2,7 @@ package model.database;
 
 import model.types.*;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 //THIS STAYS FINAL AND NOT PUBLIC
@@ -24,7 +21,8 @@ final class SQLiteStrategy implements IDBConnection {
 					+ " code text,\n"
 					+ " number integer, \n"
 					+ " title text, \n"
-					+ " description text\n"
+					+ " description text, \n"
+					+ " departmentID integer \n"
 					+");";
 			connection.createStatement().execute(sql);
 			sql = "CREATE TABLE IF NOT EXISTS departments (\n"
@@ -77,7 +75,25 @@ final class SQLiteStrategy implements IDBConnection {
 
 	@Override
 	public Course GetCourseFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
-		return null;
+		if (code.getTypeCode() != EDBTypeCode.COURSE){
+			throw new IDTypeMismatchExcception();
+		}
+		String sql = "SELECT * FROM courses WHERE id = " + code.getNumCode();
+		try {
+			ResultSet rs = connection.createStatement().executeQuery(sql);
+			Course course = new Course(code, new DBUniqueID(EDBTypeCode.DEPARTMENT));
+			course.setTitle(rs.getString("title"));
+			course.setDescription(rs.getString("description"));
+			DBUniqueID id = new DBUniqueID(EDBTypeCode.DEPARTMENT);
+			id.setNumCode(rs.getInt("departmentID"));
+			course.setDepartmentID(id);
+			course.setCode(rs.getString("code"));
+
+			return course;
+
+		}catch (Exception e){
+			return null;
+		}
 	}
 
 	@Override
@@ -102,7 +118,21 @@ final class SQLiteStrategy implements IDBConnection {
 
 	@Override
 	public void SetCourseFromCode(DBUniqueID code, Course course) throws DBExcception {
+		try {
+			String sql = "REPLACE INTO courses(id,code,number,title,description,departmentID) \n"
+					+ "VALUES (?,?,?,?,?,?);";
+			PreparedStatement preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, code.getNumCode());
+			preparedStatement.setString(2, course.getCode());
+			preparedStatement.setInt(3,course.getNumber());
+			preparedStatement.setString(4,course.getTitle());
+			preparedStatement.setString(5,course.getDescription());
+			preparedStatement.setInt(6,course.getDepartmentID().getNumCode());
 
+			preparedStatement.execute();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	@Override

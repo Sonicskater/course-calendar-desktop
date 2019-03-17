@@ -4,11 +4,10 @@ import model.database.*
 import java.util.*
 
 class Course @Throws(IDTypeMismatchExcception::class)
-constructor(id: DBUniqueID,
-            val code : String,
-            val number : Int,
-            val departmentID : DBUniqueID) : DBData(id, EDBTypeCode.COURSE)
+constructor(id: DBUniqueID, var departmentID : DBUniqueID) : DBData(id, EDBTypeCode.COURSE)
 {
+    var code : String = ""
+    var number : Int = 0
 
     private var prereqs = ArrayList<DBUniqueID>()
     private var antireqs = ArrayList<DBUniqueID>()

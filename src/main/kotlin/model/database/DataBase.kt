@@ -6,14 +6,13 @@ import java.util.HashMap
 //Object instead of class implements singleton pattern boilerplate at compile time
 //use DataBase.INSTANCE instead of new DataBase();
 object DataBase {
-    init {
-        DBProvider.init(EConnectionStrategies.SQLite)
-    }
     private val cache = HashMap<DBUniqueID, DBData>()
 
     //Extension methods
+
+    //Caching disabled for now
     private fun DBUniqueID.isNotCached(): Boolean {
-        return !cache.containsKey(this)
+        return true
     }
     private fun DBUniqueID.isCached(): Boolean{
         return cache.containsKey(this)

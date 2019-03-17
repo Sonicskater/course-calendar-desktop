@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.database.*;
+import model.types.Course;
+
+import java.sql.Connection;
 
 public class Main extends Application {
 
@@ -24,7 +27,26 @@ public class Main extends Application {
         DBProvider.INSTANCE.getConnection();
 
         System.out.println(new DBUniqueID(EDBTypeCode.COURSE));
+        Course c = null;
+        DBUniqueID id = new DBUniqueID(EDBTypeCode.COURSE);
+        id.setNumCode(1);
+        try {
+            c = new Course(id,new DBUniqueID(EDBTypeCode.DEPARTMENT));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        c.setCode("SENG");
+        c.setNumber(300);
 
+        c.setTitle("Test Course");
+        c.setDepartmentID(new DBUniqueID(EDBTypeCode.DEPARTMENT));
+        c.setDescription(" This is a course for testing the system.");
+        c.save();
+        try {
+            System.out.println(DataBase.INSTANCE.getCourse(id).getTitle());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         launch(args);
     }
