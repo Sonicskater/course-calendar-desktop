@@ -59,6 +59,7 @@ public class UserController implements Initializable {
         programRButton.setToggleGroup(actionGroup);
         courseRButton.setToggleGroup(actionGroup);
         actionGroup.selectToggle(departRButton);
+
     }
 
     // Change to work when item is selected and retrieve data from DB
