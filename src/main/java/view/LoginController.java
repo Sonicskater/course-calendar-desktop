@@ -54,7 +54,7 @@ public class LoginController implements Initializable {
             this.userTypeTitle = "UWinnipeg Course Lister (Student)";
 
             // Call faculty authentication method here
-            if (!userField.getText().equals("") || !passField.getText().equals("")) {
+            if (!userField.getText().equals("student") || !passField.getText().equals("pass")) {
                 badLogInLabel.setVisible(true); // Display log in error message
             } else {
                 authenticated = true;
@@ -68,7 +68,7 @@ public class LoginController implements Initializable {
             this.userTypeTitle = "UWinnipeg Course Manager (Faculty)";
 
             // Call faculty authentication method here
-            if (!userField.getText().equals("") || !passField.getText().equals("")) {
+            if (!userField.getText().equals("faculty") || !passField.getText().equals("pass")) {
                 badLogInLabel.setVisible(true); // Display log in error message
             } else {
                 authenticated = true;
