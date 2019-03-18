@@ -21,11 +21,11 @@ cache:
 Dependencies:
   stage: install-dependencies
   script:
-    - ./gradlew --refresh-dependencies
+    - ./gradlew --refresh-dependencies --no-daemon
 
 Build:
   stage: build
-  script: ./gradlew build
+  script: ./gradlew build --no-daemon
   cache:
     paths:
       - build
@@ -33,7 +33,7 @@ Build:
 
 Test:
   stage: test
-  script: ./gradlew test
+  script: ./gradlew test --no-daemon
   cache:
     paths:
       - build
@@ -45,7 +45,7 @@ Test:
 Java FX Distributions:
   stage: jar
   script:
-    - ./gradlew build
+    - ./gradlew build --no-daemon
   artifacts:
     paths:
       - build/distributions

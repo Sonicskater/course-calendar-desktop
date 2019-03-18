@@ -73,7 +73,8 @@ local.properties
 .sts4-cache/
 
 #gradle
-/.gradle/*
+.gradle/*
+!.gradle/
 */build/
 /build/*
 
