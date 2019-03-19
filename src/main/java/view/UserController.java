@@ -10,6 +10,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.scene.control.cell.TreeItemPropertyValueFactory;
+import model.database.DBData;
+import model.database.DataBase;
+import model.database.EDBTypeCode;
+import model.types.Course;
+import model.types.Program;
 
 import java.io.IOException;
 import java.net.URL;
@@ -34,8 +40,8 @@ public class UserController implements Initializable {
     @FXML private ListView prereqListView = new ListView();
     @FXML private ListView antireqListView = new ListView();
 
-    @FXML private TreeTableView<String> tableView;
-    @FXML private TreeTableColumn progCol;
+    @FXML private TreeTableView<Program> tableView;
+    @FXML private TreeTableColumn<Program, String> progCol;
     @FXML private TreeTableColumn<String, String> yearCol;
     @FXML private TreeTableColumn<String, String> codeCol;
     @FXML private TreeTableColumn<String, String> titleCol;
@@ -59,6 +65,16 @@ public class UserController implements Initializable {
         programRButton.setToggleGroup(actionGroup);
         courseRButton.setToggleGroup(actionGroup);
         actionGroup.selectToggle(departRButton);
+
+        progCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
+        try {
+            Program prog = new Program(DataBase.INSTANCE.getNewID(EDBTypeCode.PROGRAM));
+            prog.setName("TEST PROG");
+            TreeItem<Program> item = new TreeItem<>(prog);
+            tableView.setRoot(item);
+        }catch (Exception e){
+
+        }
 
     }
 

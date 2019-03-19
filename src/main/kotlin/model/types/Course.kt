@@ -30,7 +30,7 @@ constructor(id: DBUniqueID, var departmentID : DBUniqueID) : DBData(id, EDBTypeC
 
     fun removePreReq(id : DBUniqueID) = prereqs.remove(id)
 
-    fun title(): String {
+    fun getName(): String {
         return "$code $number"
     }
     var title = ""

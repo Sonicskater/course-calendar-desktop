@@ -88,8 +88,10 @@ object DataBase {
         DBProvider.connection.DeleteFromCode(id)
     }
 
-    fun getNewID(type : EDBTypeCode){
-        DBProvider.connection.GetNewKey(type)
+    fun getNewID(type : EDBTypeCode) : DBUniqueID{
+        val db = DBUniqueID(type)
+        db.NumCode = DBProvider.connection.GetNewKey(type)
+        return db
     }
 
 }
