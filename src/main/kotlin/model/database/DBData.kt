@@ -4,6 +4,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool
 import model.types.*
 import java.lang.Exception
 
+//Base class to implement save and delete functions, ensure all have id object.
 abstract class DBData @Throws(IDTypeMismatchExcception::class)
 constructor(id: DBUniqueID, type: EDBTypeCode) {
     var id: DBUniqueID = DBUniqueID(type)

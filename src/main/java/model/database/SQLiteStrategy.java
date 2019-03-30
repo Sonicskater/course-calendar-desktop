@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 
 //THIS STAYS FINAL AND NOT PUBLIC
+//SQLite data base implementation, queries written by hand.
+//Embedded database to simplify testing, saves to a file called database.db in the execution directory.
 final class SQLiteStrategy implements IDBConnection {
 	SQLiteStrategy(){
 		try{
@@ -15,6 +17,8 @@ final class SQLiteStrategy implements IDBConnection {
 			String url = "jdbc:sqlite:" + filename;
 			connection = DriverManager.getConnection(url);
 			System.out.println(connection.getMetaData().getDriverName() + "connection established to "+filename);
+
+			//Create any missing database tables.
 
 			String sql = "CREATE TABLE IF NOT EXISTS courses (\n"
 					+ " id integer PRIMARY KEY, \n"
@@ -72,6 +76,13 @@ final class SQLiteStrategy implements IDBConnection {
                     + ");";
             connection.createStatement().execute(sql);
 
+            sql = "CREATE TABLE IF NOT EXISTS depPrograms (\n"
+                    + " depID integer, \n"
+                    + " progID integer, \n"
+                    + " PRIMARY KEY (depID,progID) \n"
+                    + ");";
+            connection.createStatement().execute(sql);
+
 		}catch (SQLException e){
 			e.printStackTrace();
 		}catch(ClassNotFoundException e){
@@ -79,6 +90,7 @@ final class SQLiteStrategy implements IDBConnection {
 		}
 	}
 	private Connection connection;
+	//Generates unique key id
 	@Override
 	public int GetNewKey(EDBTypeCode code) throws SQLException{
 		String type = code.getString().toLowerCase()+"s";
@@ -86,6 +98,7 @@ final class SQLiteStrategy implements IDBConnection {
 		return rs.getInt("id") + 1;
 	}
 
+	//Get department + programs from id code
 	@Override
 	public Department GetDepFromCode(DBUniqueID code) throws IDTypeMismatchExcception {
 		if (code.getTypeCode() != EDBTypeCode.DEPARTMENT){
@@ -96,8 +109,17 @@ final class SQLiteStrategy implements IDBConnection {
 			ResultSet rs = connection.createStatement().executeQuery(sql);
 			Department dep = new Department(code);
 			dep.setName(rs.getString("name"));
+            sql = "SELECT progID FROM depPrograms WHERE depID = " + code.getNumCode();
+            rs = connection.createStatement().executeQuery(sql);
+
+            while(rs.next()){
+                DBUniqueID id2 = new DBUniqueID(EDBTypeCode.PROGRAM);
+                id2.setNumCode(rs.getInt("progID"));
+                dep.addProgram(id2);
+            }
 			return dep;
 		}catch(Exception e){
+		    e.printStackTrace();
 			return null;
 		}
 	}
@@ -118,6 +140,8 @@ final class SQLiteStrategy implements IDBConnection {
 			course.setDepartmentID(id);
 			course.setCode(rs.getString("code"));
 
+
+			//Retrieve antireq relations
 			sql = "SELECT antiID FROM antireqs WHERE courseID = " + code.getNumCode();
 			rs = connection.createStatement().executeQuery(sql);
 
@@ -127,6 +151,8 @@ final class SQLiteStrategy implements IDBConnection {
 			    course.addAntiReq(id2);
             }
 
+
+			//retreive prereq relations
             sql = "SELECT preID FROM prereqs WHERE courseID = " + code.getNumCode();
             rs = connection.createStatement().executeQuery(sql);
 
@@ -156,6 +182,7 @@ final class SQLiteStrategy implements IDBConnection {
             program.setName(rs.getString("name"));
             program.setDescription(rs.getString("description"));
 
+            //retreive optional items
             sql = "SELECT optID FROM optional WHERE programID = " + code.getNumCode();
             rs = connection.createStatement().executeQuery(sql);
             while(rs.next()){
@@ -164,6 +191,7 @@ final class SQLiteStrategy implements IDBConnection {
                 program.addOptional(id2);
             }
 
+            //Retrieve required items
             sql = "SELECT reqID FROM required WHERE programID = " + code.getNumCode();
             rs = connection.createStatement().executeQuery(sql);
             while(rs.next()){
@@ -204,28 +232,64 @@ final class SQLiteStrategy implements IDBConnection {
 	@Override
 	public void DeleteFromCode(DBUniqueID code) {
 	    try {
-            String table = "";
+            String sql = "";
+            PreparedStatement prst;
             switch (code.getTypeCode()) {
                 case DEPARTMENT:
-                    table = "departments";
-                    break;
+                    sql = "DELETE FROM departments WHERE id = ?1;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+                    sql = "DELETE FROM depPrograms WHERE depID = ?1;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+                    return;
                 case COURSE:
-                    table = "courses";
-                    break;
+                    sql = "DELETE FROM courses WHERE id = ?;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+
+
+                    return;
                 case PROGRAM:
-                    table = "programs";
-                    break;
+                    sql = "DELETE FROM programs WHERE id = ?;";
+
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+                    sql = "DELETE FROM depPrograms WHERE progID = ?1;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+                    sql = "DELETE FROM required WHERE programID = ?1;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+                    sql = "DELETE FROM optional WHERE programID = ?1;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+                    return;
                 case USER:
-                    table = "users";
+                    sql = "DELETE FROM users WHERE id = ?;";
                     break;
             }
 
-            String sql = "DELETE FROM ? WHERE id = ?";
-            PreparedStatement prst = connection.prepareStatement(sql);
-            prst.setString(1, table);
-            prst.setInt(2,code.getNumCode());
 
-            prst.execute();
 
         }catch (Exception e){
 	        e.printStackTrace();
@@ -246,6 +310,14 @@ final class SQLiteStrategy implements IDBConnection {
             prst.setInt(1, code.getNumCode());
             prst.setString(2,department.getName());
             prst.execute();
+            for (DBUniqueID c : department.getPrograms()){
+                sql = "REPLACE INTO depPrograms(depID,progID) \n"
+                        + "VALUES (?,?);";
+                prst = connection.prepareStatement(sql);
+                prst.setInt(1,department.getId().getNumCode());
+                prst.setInt(2,c.getNumCode());
+                prst.execute();
+            }
 
         }catch (Exception e){
             e.printStackTrace();

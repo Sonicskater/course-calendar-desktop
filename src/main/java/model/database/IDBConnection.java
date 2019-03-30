@@ -8,6 +8,9 @@ import model.types.User;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+//Defines generic DB interface
+//shouldn't be used by rest of code as class DataBase has been built on top of this to simplify functionality.
+//Done because i know this code works, but i dont like the interface so DataBase wires these functions together into something more usable.
 public interface IDBConnection {
 	//Define functions for controllers here
 

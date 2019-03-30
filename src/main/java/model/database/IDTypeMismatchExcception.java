@@ -1,5 +1,6 @@
 package model.database;
 
+//Thrown when DBUniqueID type doesnt match class type
 public class IDTypeMismatchExcception extends Exception {
 
 	/**

@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.database.*;
 import model.types.Course;
+import model.types.Department;
+import model.types.Program;
 
 import java.sql.Connection;
 
@@ -52,6 +54,26 @@ public class Main extends Application {
         }catch (Exception e){
             e.printStackTrace();
         }
+        Program p = null;
+        try {
+            p = new Program(new DBUniqueID(EDBTypeCode.PROGRAM));
+        } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+            idTypeMismatchExcception.printStackTrace();
+        }
+        p.setName("Bachelor of Computer Science");
+        p.addRequired(c.getId());
+        p.setDescription("A 4-year program that teaches general computer science");
+        p.save();
+        Department d = null;
+        try {
+             d = new Department(new DBUniqueID(EDBTypeCode.DEPARTMENT));
+        } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+            idTypeMismatchExcception.printStackTrace();
+        }
+        d.setName("Computer Science");
+        d.addProgram(p.getId());
+        d.save();
+
         System.out.println(DataBase.INSTANCE.getCourseIDs());
 
         System.out.println(c.getPreReqs());

@@ -17,6 +17,8 @@ import model.database.EDBTypeCode;
 import model.types.Department;
 import model.types.Program;
 
+//Old testing class
+@Deprecated
 public class DummyClass implements Serializable {
 	private static final long serialVersionUID = 4064740008720574220L;
 	public boolean run = true;

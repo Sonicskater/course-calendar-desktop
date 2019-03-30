@@ -23,7 +23,9 @@ object DataBase {
 
     //Extension methods
 
-    //Caching disabled for now
+    //Caching disabled for now, Cant work around without extensive work as java has no value type object equivalent, like a struct.
+    //Could be implemented easily in C/C++/C#, or by manually rewriting equals.
+    //No real gains to be had at this scale, will leave for now
     private fun DBUniqueID.isNotCached(): Boolean {
         return true
     }

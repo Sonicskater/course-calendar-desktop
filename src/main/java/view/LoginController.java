@@ -77,10 +77,10 @@ public class LoginController implements Initializable {
 
         if (authenticated) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("interface/userView.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("interface/userViewNew.fxml"));
             Parent parent = loader.load();
             Scene newScene = new Scene(parent);
-            UserController control = loader.getController();
+            UserViewNew control = loader.getController();
             control.setUserType(userType); // Pass data into userView
             Stage userStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             userStage.setTitle(this.userTypeTitle);

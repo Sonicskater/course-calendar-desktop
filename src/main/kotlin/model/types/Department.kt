@@ -11,6 +11,11 @@ constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.DEPARTMENT) {
 
     var name = ""
 
+    val progNum: Int
+        get() {
+            return getPrograms().size
+        }
+
     private var programs = ArrayList<DBUniqueID>()
 
     fun addProgram(id : DBUniqueID){
@@ -21,5 +26,7 @@ constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.DEPARTMENT) {
 
     fun getPrograms() = Collections.unmodifiableList(programs)
 
-    fun removeProgram(id : DBUniqueID) = programs.remove(id)
+    fun removeProgram(id : DBUniqueID){
+        programs.remove(id)
+    }
 }

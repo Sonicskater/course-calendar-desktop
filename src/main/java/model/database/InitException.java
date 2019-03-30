@@ -1,5 +1,6 @@
 package model.database;
 
+//Thrown when DB init fails, or some other unwanted state
 public class InitException extends Exception {
 
 	/**

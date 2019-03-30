@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-
+@Deprecated
 public class UserController implements Initializable {
     private static final int STUDENT = 0;
     private static final int FACULTY = 1;
