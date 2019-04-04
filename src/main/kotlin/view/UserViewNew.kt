@@ -200,6 +200,7 @@ class UserViewNew : Initializable {
             progTable.items = progList
             return
         }else {
+            selectedDepartment = DataBase.getDepartment(selectedDepartment!!.id)
             for (id: DBUniqueID in selectedDepartment!!.getPrograms()) {
                 progList.add(DataBase.getProgram(id))
             }
