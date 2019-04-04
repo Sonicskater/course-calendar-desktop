@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro8.JMetro;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +24,7 @@ public class LoginController implements Initializable {
 
     private int userType = -1; // Type of user, either STUDENT or FACULTY
     private String userTypeTitle; // Title of window based on user type
-
+    @FXML private AnchorPane root;
     // Username and password fields
     @FXML private TextField userField;
     @FXML private PasswordField passField;
@@ -45,6 +47,9 @@ public class LoginController implements Initializable {
         userTypeGroup.selectToggle(facultyRButton);
 
         badLogInLabel.setVisible(false); // Don't show login failed message on start
+
+        //Apply 3rd-party theme
+        new JMetro(JMetro.Style.LIGHT).applyTheme(root);
     }
 
     // Runs when login button is clicked

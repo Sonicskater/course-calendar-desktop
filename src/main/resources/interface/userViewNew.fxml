@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserViewNew">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserViewNew">
    <children>
       <VBox prefHeight="400.0" prefWidth="799.0">
          <children>
@@ -59,7 +59,7 @@
             </TabPane>
             <ToolBar fx:id="adminToolbar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="96.0" prefWidth="445.0">
               <items>
-                <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="66.0" text="Add" />
+                <Button fx:id="add" alignment="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" text="Add" />
                   <Button mnemonicParsing="false" text="Modify" />
                   <Button fx:id="delete" mnemonicParsing="false" text="Delete" />
               </items>

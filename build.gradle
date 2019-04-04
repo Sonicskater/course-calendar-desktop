@@ -51,7 +51,11 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
-	//define any external libraries needed
+    implementation "org.jetbrains.kotlin:kotlin-reflect"
+    compile "org.jfxtras:jmetro:5.3"
+    compile 'org.kordamp.bootstrapfx:bootstrapfx-core:0.2.4'
+
+    //define any external libraries needed
 	implementation 'org.xerial:sqlite-jdbc:3.7.2'
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'

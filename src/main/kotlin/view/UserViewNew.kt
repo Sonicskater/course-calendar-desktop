@@ -17,7 +17,9 @@ import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.layout.AnchorPane
 import javafx.scene.text.Text
+import jfxtras.styles.jmetro8.JMetro
 import model.database.DBUniqueID
 import model.database.DataBase
 import model.database.EDBTypeCode
@@ -78,6 +80,9 @@ class UserViewNew : Initializable {
 
     @FXML
     private lateinit var adminToolbar: ToolBar
+
+    @FXML
+    private lateinit var root: AnchorPane
 
     private var selectedDepartment: Department? = null
 
@@ -167,6 +172,10 @@ class UserViewNew : Initializable {
 
         //Update department list for initial viewing
         updateDepartmentList()
+
+        //Apply 3rd-party theme
+        JMetro(JMetro.Style.LIGHT).applyTheme(root)
+
 
 
     }
