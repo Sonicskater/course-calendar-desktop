@@ -2,34 +2,118 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.RadioButton?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserController">
    <children>
-      <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/logo.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="userField" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" promptText="Username" />
-            <PasswordField fx:id="passField" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" promptText="password" />
-            <HBox alignment="CENTER" prefHeight="4.0" prefWidth="300.0" spacing="20.0">
+            <HBox prefHeight="555.0" prefWidth="1000.0" spacing="5.0">
                <children>
-                  <RadioButton fx:id="facultyRButton" mnemonicParsing="false" text="Faculty" />
-                  <RadioButton fx:id="studentRButton" mnemonicParsing="false" text="Student" />
+                  <TableView prefHeight="552.0" prefWidth="780.0">
+                    <columns>
+                      <TableColumn prefWidth="130.0" text="Department" />
+                        <TableColumn prefWidth="130.0" text="Program" />
+                        <TableColumn prefWidth="125.0" text="Course" />
+                        <TableColumn minWidth="5.0" prefWidth="125.0" text="Code" />
+                        <TableColumn prefWidth="125.0" text="Required" />
+                        <TableColumn prefWidth="125.0" text="Year" />
+                    </columns>
+                  </TableView>
+                  <VBox prefHeight="528.0" prefWidth="253.0" spacing="3.0">
+                     <children>
+                        <HBox prefHeight="0.0" prefWidth="228.0" translateY="5.0">
+                           <children>
+                              <Label text="Course Information" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="0.0" prefWidth="80.0" text="Log Out" textFill="#00ff40" translateX="20.0" />
+                           </children>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
+                        </HBox>
+                        <Label text="Description">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane prefHeight="100.0" prefWidth="228.0">
+                           <content>
+                              <Label fx:id="descriptionLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                           </content>
+                           <effect>
+                              <ColorAdjust brightness="0.38" />
+                           </effect>
+                        </ScrollPane>
+                        <Label text="Prerequisites">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="prereqListView" prefHeight="100.0" prefWidth="253.0" />
+                        <Label text="Antirequisites">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ListView fx:id="antireqListView" prefHeight="100.0" prefWidth="253.0" />
+                        <Label text="Program Information" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Description">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane prefHeight="100.0" prefWidth="228.0">
+                           <content>
+                              <Label fx:id="descriptionLabel1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                           </content>
+                        </ScrollPane>
+                     </children>
+                     <effect>
+                        <ColorAdjust hue="-0.83" saturation="0.1" />
+                     </effect>
+                  </VBox>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="150.0" text="Log In" />
-            <Label fx:id="badLogInLabel" prefHeight="37.0" prefWidth="146.0" text="The username or password you provided is incorrect" textAlignment="CENTER" textFill="RED" wrapText="true" />
+            <HBox fx:id="facultyPane" alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="1000.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="73.0" prefWidth="739.0" spacing="50.0">
+                     <children>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#add" prefHeight="40.0" prefWidth="100.0" text="Add">
+                           <effect>
+                              <ColorAdjust hue="0.57" saturation="0.4" />
+                           </effect>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="40.0" prefWidth="100.0" text="Delete">
+                           <effect>
+                              <ColorAdjust contrast="0.05" hue="-0.09" saturation="0.4" />
+                           </effect>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
       </VBox>
    </children>
