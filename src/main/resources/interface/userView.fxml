@@ -3,87 +3,115 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.control.TreeTableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserController">
    <children>
       <VBox prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="320.0" prefWidth="800.0" spacing="5.0">
+            <HBox prefHeight="555.0" prefWidth="1000.0" spacing="5.0">
                <children>
-                  <TreeTableView fx:id="tableView" prefHeight="320.0" prefWidth="558.0">
+                  <TableView prefHeight="552.0" prefWidth="780.0">
                     <columns>
-                      <TreeTableColumn fx:id="progCol" prefWidth="199.0" text="Program" />
-                      <TreeTableColumn fx:id="yearCol" minWidth="0.0" prefWidth="58.0" text="Year" />
-                        <TreeTableColumn fx:id="codeCol" prefWidth="78.0" text="Code" />
-                        <TreeTableColumn fx:id="titleCol" prefWidth="208.0" text="Title" />
+                      <TableColumn prefWidth="130.0" text="Department" />
+                        <TableColumn prefWidth="130.0" text="Program" />
+                        <TableColumn prefWidth="125.0" text="Course" />
+                        <TableColumn minWidth="5.0" prefWidth="125.0" text="Code" />
+                        <TableColumn prefWidth="125.0" text="Required" />
+                        <TableColumn prefWidth="125.0" text="Year" />
                     </columns>
-                  </TreeTableView>
-                  <VBox prefHeight="312.0" prefWidth="228.0" spacing="3.0">
+                  </TableView>
+                  <VBox prefHeight="528.0" prefWidth="253.0" spacing="3.0">
                      <children>
                         <HBox prefHeight="0.0" prefWidth="228.0" translateY="5.0">
                            <children>
-                              <Label text="Course Information">
+                              <Label text="Course Information" textFill="RED">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="0.0" prefWidth="80.0" text="Log Out" translateX="20.0" />
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="0.0" prefWidth="80.0" text="Log Out" textFill="#00ff40" translateX="20.0" />
                            </children>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
                         </HBox>
                         <Label text="Description">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ScrollPane prefHeight="79.0" prefWidth="228.0">
+                        <ScrollPane prefHeight="100.0" prefWidth="228.0">
                            <content>
-                              <Label fx:id="descriptionLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" textFill="#320097" wrapText="true" />
+                              <Label fx:id="descriptionLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
                            </content>
+                           <effect>
+                              <ColorAdjust brightness="0.38" />
+                           </effect>
                         </ScrollPane>
                         <Label text="Prerequisites">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="prereqListView" prefHeight="70.0" prefWidth="228.0" />
+                        <ListView fx:id="prereqListView" prefHeight="100.0" prefWidth="253.0" />
                         <Label text="Antirequisites">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="antireqListView" prefHeight="74.0" prefWidth="228.0" />
+                        <ListView fx:id="antireqListView" prefHeight="100.0" prefWidth="253.0" />
+                        <Label text="Program Information" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label text="Description">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ScrollPane prefHeight="100.0" prefWidth="228.0">
+                           <content>
+                              <Label fx:id="descriptionLabel1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                           </content>
+                        </ScrollPane>
                      </children>
+                     <effect>
+                        <ColorAdjust hue="-0.83" saturation="0.1" />
+                     </effect>
                   </VBox>
                </children>
             </HBox>
-            <HBox fx:id="facultyPane" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+            <HBox fx:id="facultyPane" alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="1000.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="90.0" prefWidth="562.0" spacing="5.0">
+                  <HBox alignment="CENTER" prefHeight="73.0" prefWidth="739.0" spacing="50.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="255.0" spacing="15.0">
-                           <children>
-                              <RadioButton fx:id="departRButton" mnemonicParsing="false" text="Department" />
-                              <RadioButton fx:id="programRButton" mnemonicParsing="false" text="Program" />
-                              <RadioButton fx:id="courseRButton" mnemonicParsing="false" text="Course" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="31.0" prefWidth="483.0" spacing="10.0">
-                           <children>
-                              <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="80.0" text="Add" />
-                              <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="80.0" text="Delete" />
-                              <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#edit" prefWidth="80.0" text="Edit" />
-                           </children>
-                        </HBox>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#add" prefHeight="40.0" prefWidth="100.0" text="Add">
+                           <effect>
+                              <ColorAdjust hue="0.57" saturation="0.4" />
+                           </effect>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="40.0" prefWidth="100.0" text="Delete">
+                           <effect>
+                              <ColorAdjust contrast="0.05" hue="-0.09" saturation="0.4" />
+                           </effect>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                      </children>
-                  </VBox>
+                  </HBox>
                </children>
             </HBox>
          </children>
