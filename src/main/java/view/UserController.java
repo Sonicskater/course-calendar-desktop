@@ -12,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
+import javafx.stage.StageStyle;
 import model.database.DBData;
 import model.database.DataBase;
 import model.database.EDBTypeCode;
@@ -24,32 +25,31 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
-@Deprecated
 public class UserController implements Initializable {
     private static final int STUDENT = 0;
     private static final int FACULTY = 1;
 
     private int userType; // Type of user, either STUDENT or FACULTY
     @FXML private HBox facultyPane; // Pane with faculty actions
-
+/*
     // Group of radio buttons for faculty actions
     @FXML private ToggleGroup actionGroup;
     @FXML private RadioButton departRButton;
     @FXML private RadioButton programRButton;
     @FXML private RadioButton courseRButton;
-
+*/
     // Sidebar information
     @FXML private Label descriptionLabel;
     @FXML private ListView prereqListView = new ListView();
     @FXML private ListView antireqListView = new ListView();
-
+/*
     // Tree information
     @FXML private TreeTableView<Program> tableView;
     @FXML private TreeTableColumn<Program, String> progCol;
     @FXML private TreeTableColumn<String, String> yearCol;
     @FXML private TreeTableColumn<String, String> codeCol;
     @FXML private TreeTableColumn<String, String> titleCol;
-
+*/
     // Used by LoginController to set the user type
     public void setUserType(int userType) {
         this.userType = userType;
@@ -64,7 +64,7 @@ public class UserController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        updateSelectedItemInfo(); // updates sidebar
+/*        updateSelectedItemInfo(); // updates sidebar
 
         // Group of radio buttons for faculty actions
         actionGroup = new ToggleGroup();
@@ -83,25 +83,39 @@ public class UserController implements Initializable {
         }catch (Exception e){
 
         }
-
+*/
     }
 
     // Temporary information to use before loading from database
     public void updateSelectedItemInfo() {
+        /*
         prereqListView.getItems().addAll(new ArrayList<>(Arrays.asList("AAAA111", "BBBB222", "CCCC333", "DDDD444", "EEEE555","FFFF666")));
         antireqListView.getItems().addAll(new ArrayList<>(Arrays.asList("XXXX123", "YYYY456", "ZZZZ789")));
         descriptionLabel.setText("Introduction into the development and evolution of software. Covers key conceptual foundations as well as key methods and techniques used in the different phases of the software lifecycle. Technologies are selected based on their fitness for purpose towards explicitly stated project objectives for different types of project. Emphasis is on both technical and soft skill needed for high quality software and software-based products developed in teams.");
+        */
     }
 
     // Logs out of account and opens the login screen
     public void logOut(ActionEvent event) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("interface/loginView.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("interface/loginView.fxml"));
+        Parent parent = loader.load();
         Scene newScene = new Scene(parent);
-        Stage loginStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        loginStage.setScene(newScene);
-        loginStage.show();
+        Stage userStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        userStage.setScene(newScene);
+        userStage.show();
     }
 
+
+    public void add(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/interface/addView.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.show();
+    }
+
+/*
     // Runs when the add button is clicked
     public void add() {
         if (this.actionGroup.getSelectedToggle().equals(this.departRButton)) {
@@ -170,4 +184,5 @@ public class UserController implements Initializable {
     public void editCourse() {
         System.out.println("Editing Course");
     }
+    */
 }
