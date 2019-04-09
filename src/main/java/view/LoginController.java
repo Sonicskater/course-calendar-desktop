@@ -82,11 +82,11 @@ public class LoginController implements Initializable {
         // If password is entered correctly, transition to the new window
         if (authenticated) {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("interface/userViewNew.fxml"));
+            loader.setLocation(getClass().getClassLoader().getResource("interface/userView.fxml"));
             Parent parent = loader.load();
             Scene newScene = new Scene(parent);
-            UserViewNew control = loader.getController();
-            control.setUserType(userType); // Pass user type information to UserController
+            UserController control = loader.getController();
+            control.setUserType(userType); // Pass data into userView
             Stage userStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             userStage.setTitle(this.userTypeTitle);
             userStage.setScene(newScene);
