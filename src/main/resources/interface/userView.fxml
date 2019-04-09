@@ -19,14 +19,14 @@
             <HBox prefHeight="555.0" prefWidth="1000.0" spacing="5.0">
                <children>
                   <TableView prefHeight="552.0" prefWidth="780.0">
-                    <columns>
-                      <TableColumn prefWidth="130.0" text="Department" />
+                     <columns>
+                        <TableColumn prefWidth="130.0" text="Department" />
                         <TableColumn prefWidth="130.0" text="Program" />
                         <TableColumn prefWidth="125.0" text="Course" />
                         <TableColumn minWidth="5.0" prefWidth="125.0" text="Code" />
                         <TableColumn prefWidth="125.0" text="Required" />
                         <TableColumn prefWidth="125.0" text="Year" />
-                    </columns>
+                     </columns>
                   </TableView>
                   <VBox prefHeight="528.0" prefWidth="253.0" spacing="3.0">
                      <children>
@@ -102,7 +102,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="40.0" prefWidth="100.0" text="Delete">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Delete">
                            <effect>
                               <ColorAdjust contrast="0.05" hue="-0.09" saturation="0.4" />
                            </effect>
