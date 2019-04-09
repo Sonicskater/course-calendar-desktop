@@ -31,7 +31,7 @@ import java.util.ArrayList
 import javax.swing.plaf.multi.MultiTabbedPaneUI
 
 
-class UserViewNew : Initializable {
+class UserViewTemp : Initializable {
     var userType: Int = 0
         set(value){
             field = value

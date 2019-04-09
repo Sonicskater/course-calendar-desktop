@@ -1,5 +1,8 @@
 package view;
 
+import controller.CombinedData;
+import controller.MainController;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +11,15 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import jfxtras.styles.jmetro8.JMetro;
 import model.database.DBData;
 import model.database.DataBase;
 import model.database.EDBTypeCode;
@@ -23,13 +30,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class UserController implements Initializable {
+public class UserView implements Initializable {
     private static final int STUDENT = 0;
     private static final int FACULTY = 1;
 
     private int userType; // Type of user, either STUDENT or FACULTY
+    @FXML private AnchorPane root;
     @FXML private HBox facultyPane; // Pane with faculty actions
 /*
     // Group of radio buttons for faculty actions
@@ -42,6 +51,14 @@ public class UserController implements Initializable {
     @FXML private Label descriptionLabel;
     @FXML private ListView prereqListView = new ListView();
     @FXML private ListView antireqListView = new ListView();
+
+    @FXML private TableView<CombinedData> table = new TableView<>();
+    @FXML private TableColumn<String, CombinedData> departmentCol;
+    @FXML private TableColumn<String, CombinedData> programCol;
+    @FXML private TableColumn<String, CombinedData> courseCol;
+    @FXML private TableColumn<String, CombinedData> codeCol;
+    @FXML private TableColumn<String, CombinedData> requiredCol;
+    @FXML private TableColumn<String, CombinedData> yearCol;
 /*
     // Tree information
     @FXML private TreeTableView<Program> tableView;
@@ -50,7 +67,8 @@ public class UserController implements Initializable {
     @FXML private TreeTableColumn<String, String> codeCol;
     @FXML private TreeTableColumn<String, String> titleCol;
 */
-    // Used by LoginController to set the user type
+    private ArrayObservableList<CombinedData> tableList = new ArrayObservableList<>();
+    // Used by LoginView to set the user type
     public void setUserType(int userType) {
         this.userType = userType;
         setUserDisplay(userType);
@@ -84,6 +102,28 @@ public class UserController implements Initializable {
 
         }
 */
+
+
+        departmentCol.setCellValueFactory(new PropertyValueFactory("departmentName"));
+        programCol.setCellValueFactory(new PropertyValueFactory("programName"));
+        courseCol.setCellValueFactory(new PropertyValueFactory("courseName"));
+        codeCol.setCellValueFactory(new PropertyValueFactory("courseCode"));
+        requiredCol.setCellValueFactory(new PropertyValueFactory("required"));
+        yearCol.setCellValueFactory(new PropertyValueFactory("courseYear"));
+
+        List<CombinedData> data = new MainController().getData();
+
+        for (CombinedData dat : data){
+            tableList.add(dat);
+        }
+
+        System.out.println(tableList);
+
+        table.setItems(tableList);
+
+
+        new JMetro(JMetro.Style.LIGHT).applyTheme(root);
+
     }
 
     // Temporary information to use before loading from database

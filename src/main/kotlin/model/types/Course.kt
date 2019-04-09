@@ -9,6 +9,8 @@ constructor(id: DBUniqueID, var departmentID : DBUniqueID) : DBData(id, EDBTypeC
     var code : String = ""
     var number : Int = 0
 
+    var year : Int = 2000
+
     private var prereqs = ArrayList<DBUniqueID>()
     private var antireqs = ArrayList<DBUniqueID>()
 

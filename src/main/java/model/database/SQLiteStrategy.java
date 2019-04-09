@@ -27,7 +27,8 @@ final class SQLiteStrategy implements IDBConnection {
 					+ " title text, \n"
 					+ " description text, \n"
 					+ " departmentID integer \n"
-					+");";
+                    + " year integer \n"
+                    +");";
 			connection.createStatement().execute(sql);
 			sql = "CREATE TABLE IF NOT EXISTS departments (\n"
 					+ " id integer PRIMARY KEY, \n"
@@ -139,6 +140,7 @@ final class SQLiteStrategy implements IDBConnection {
 			id.setNumCode(rs.getInt("departmentID"));
 			course.setDepartmentID(id);
 			course.setCode(rs.getString("code"));
+			course.setYear(rs.getInt("year"));
 
 
 			//Retrieve antireq relations
@@ -330,8 +332,8 @@ final class SQLiteStrategy implements IDBConnection {
             if (code.getTypeCode() != EDBTypeCode.COURSE){
                 throw new IDTypeMismatchExcception();
             }
-			String sql = "REPLACE INTO courses(id,code,number,title,description,departmentID) \n"
-					+ "VALUES (?,?,?,?,?,?);";
+			String sql = "REPLACE INTO courses(id,code,number,title,description,departmentID,year) \n"
+					+ "VALUES (?,?,?,?,?,?,?);";
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, code.getNumCode());
 			preparedStatement.setString(2, course.getCode());
@@ -339,6 +341,7 @@ final class SQLiteStrategy implements IDBConnection {
 			preparedStatement.setString(4,course.getTitle());
 			preparedStatement.setString(5,course.getDescription());
 			preparedStatement.setInt(6,course.getDepartmentID().getNumCode());
+			preparedStatement.setInt(7,course.getYear());
 
 			preparedStatement.execute();
 			for (DBUniqueID c : course.getPreReqs()){

@@ -12,32 +12,32 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserController">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserView">
    <children>
       <VBox prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="555.0" prefWidth="1000.0" spacing="5.0">
                <children>
-                  <TableView prefHeight="552.0" prefWidth="780.0">
+                  <TableView fx:id="table" prefHeight="552.0" prefWidth="780.0">
                      <columns>
-                        <TableColumn prefWidth="130.0" text="Department" />
-                        <TableColumn prefWidth="130.0" text="Program" />
-                        <TableColumn prefWidth="125.0" text="Course" />
-                        <TableColumn minWidth="5.0" prefWidth="125.0" text="Code" />
-                        <TableColumn prefWidth="125.0" text="Required" />
-                        <TableColumn prefWidth="125.0" text="Year" />
+                        <TableColumn fx:id="departmentCol" prefWidth="130.0" text="Department" />
+                        <TableColumn fx:id="programCol" prefWidth="130.0" text="Program" />
+                        <TableColumn fx:id="courseCol" prefWidth="125.0" text="Course" />
+                        <TableColumn fx:id="codeCol" minWidth="5.0" prefWidth="125.0" text="Code" />
+                        <TableColumn fx:id="requiredCol" prefWidth="125.0" text="Required" />
+                        <TableColumn fx:id="yearCol" prefWidth="125.0" text="Year" />
                      </columns>
                   </TableView>
                   <VBox prefHeight="528.0" prefWidth="253.0" spacing="3.0">
                      <children>
                         <HBox prefHeight="0.0" prefWidth="228.0" translateY="5.0">
                            <children>
-                              <Label text="Course Information" textFill="RED">
+                              <Label prefHeight="20.0" prefWidth="91.0" text="Course Info" textFill="RED">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="0.0" prefWidth="80.0" text="Log Out" textFill="#00ff40" translateX="20.0" />
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="115.0" text="Log Out" textFill="#00ff40" translateX="20.0" />
                            </children>
                            <effect>
                               <ColorAdjust />
@@ -68,7 +68,7 @@
                            </font>
                         </Label>
                         <ListView fx:id="antireqListView" prefHeight="100.0" prefWidth="253.0" />
-                        <Label text="Program Information" textFill="RED">
+                        <Label text="Program Info" textFill="RED">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

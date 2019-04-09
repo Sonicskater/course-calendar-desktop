@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LoginController implements Initializable {
+public class LoginView implements Initializable {
     private static final int STUDENT = 0;
     private static final int FACULTY = 1;
 
@@ -85,7 +85,7 @@ public class LoginController implements Initializable {
             loader.setLocation(getClass().getClassLoader().getResource("interface/userView.fxml"));
             Parent parent = loader.load();
             Scene newScene = new Scene(parent);
-            UserController control = loader.getController();
+            UserView control = loader.getController();
             control.setUserType(userType); // Pass data into userView
             Stage userStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             userStage.setTitle(this.userTypeTitle);
