@@ -180,8 +180,9 @@ public class UserView implements Initializable {
 
 
     public void add(ActionEvent event) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/interface/addView.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getClassLoader().getResource("interface/addView.fxml"));
+        Parent root1 = fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.show();

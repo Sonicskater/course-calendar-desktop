@@ -14,8 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddView">
    <children>
       <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -23,9 +22,9 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" layoutX="27.0" prefHeight="371.0" prefWidth="258.0" spacing="10.0">
+                        <VBox alignment="TOP_CENTER" layoutX="27.0" prefHeight="349.0" prefWidth="258.0" spacing="10.0">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="164.0" text="Create New Department" textAlignment="JUSTIFY" textFill="#1200ff">
+                              <Label prefHeight="29.0" prefWidth="164.0" text="Create New Department" textAlignment="JUSTIFY" textFill="#1200ff">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -33,40 +32,16 @@
                                     <Insets bottom="5.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Department Name">
+                              <TextField fx:id="depName" prefHeight="25.0" prefWidth="200.0" promptText="Department Name">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextField>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="First Program Name">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextField>
-                              <TextArea prefHeight="75.0" prefWidth="200.0" text="Program Description">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextArea>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Second Program Name">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextField>
-                              <TextArea prefHeight="75.0" prefWidth="200.0" text="Program Description">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextArea>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Department">
+                              <Button mnemonicParsing="false" onAction="#addDep" prefHeight="25.0" prefWidth="500.0" text="Add Department">
                                  <effect>
                                     <ColorAdjust hue="0.48" saturation="0.4" />
                                  </effect>
                               </Button>
-                           </children>
-                        </VBox>
-                        <VBox alignment="TOP_CENTER" layoutX="312.0" prefHeight="372.0" prefWidth="258.0" spacing="10.0">
-                           <children>
                               <Label text="Add New Program" textFill="#1200ff">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
@@ -76,28 +51,59 @@
                                  </VBox.margin>
                               </Label>
                               <Label prefHeight="17.0" prefWidth="273.0" text="Department of Program" />
-                              <ComboBox prefHeight="25.0" prefWidth="262.0">
+                              <ComboBox fx:id="departmentComboBox" prefHeight="25.0" prefWidth="262.0">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </ComboBox>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Program Name">
+                              <TextField fx:id="progName" prefHeight="25.0" prefWidth="200.0" promptText="Program Name">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextField>
-                              <TextArea prefHeight="75.0" prefWidth="200.0" text="Program Description">
+                              <TextArea fx:id="progDesc" prefHeight="75.0" prefWidth="200.0" text="Program Description">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextArea>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Program">
+                              <Button mnemonicParsing="false" onAction="#addProg" prefHeight="25.0" prefWidth="500.0" text="Add Program">
                                  <effect>
                                     <ColorAdjust hue="0.48" saturation="0.4" />
                                  </effect>
                                  <VBox.margin>
-                                    <Insets top="93.0" />
+                                    <Insets />
                                  </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" layoutX="312.0" prefHeight="372.0" prefWidth="258.0" spacing="10.0">
+                           <children>
+                              <Label prefHeight="29.0" prefWidth="184.0" text="Add Courses To Program" textAlignment="JUSTIFY" textFill="#1200ff">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="17.0" prefWidth="273.0" text="Course to Add" />
+                              <ComboBox fx:id="courseToAdd" prefHeight="25.0" prefWidth="262.0">
+                                 <effect>
+                                    <ColorAdjust hue="-0.83" saturation="0.1" />
+                                 </effect>
+                              </ComboBox>
+                              <Label prefHeight="17.0" prefWidth="273.0" text="Program to Add to" />
+                              <ComboBox fx:id="programToAddTo" prefHeight="25.0" prefWidth="262.0">
+                                 <effect>
+                                    <ColorAdjust hue="-0.83" saturation="0.1" />
+                                 </effect>
+                              </ComboBox>
+                              <Button mnemonicParsing="false" onAction="#addProg" prefHeight="25.0" prefWidth="500.0" text="Add Required">
+                                 <effect>
+                                    <ColorAdjust hue="0.48" saturation="0.4" />
+                                 </effect>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#addProg" prefHeight="25.0" prefWidth="500.0" text="Add Optional">
+                                 <effect>
+                                    <ColorAdjust hue="0.48" saturation="0.4" />
+                                 </effect>
                               </Button>
                            </children>
                         </VBox>
@@ -125,27 +131,12 @@
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextField>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="First Program Name">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextField>
                               <TextArea prefHeight="75.0" prefWidth="200.0" text="Program Description">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextArea>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Second Program Name">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextField>
-                              <TextArea prefHeight="75.0" prefWidth="200.0" text="Program Description">
-                                 <effect>
-                                    <ColorAdjust hue="-0.83" saturation="0.1" />
-                                 </effect>
-                              </TextArea>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Department">
+                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Course">
                                  <effect>
                                     <ColorAdjust hue="-0.76" saturation="0.4" />
                                  </effect>
