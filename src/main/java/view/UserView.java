@@ -182,10 +182,23 @@ public class UserView implements Initializable {
     public void add(ActionEvent event) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getClassLoader().getResource("interface/addView.fxml"));
-        Parent root1 = fxmlLoader.load();
+        Parent root = fxmlLoader.load();
         ((AddView)fxmlLoader.getController()).view = this;
         Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root));
+        stage.setTitle("Adding Tools");
+        stage.show();
+    }
+
+
+    public void delete(ActionEvent event) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getClassLoader().getResource("interface/deleteView.fxml"));
+        Parent root = fxmlLoader.load();
+        ((DeleteView)fxmlLoader.getController()).view = this;
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Deleting Tools");
         stage.show();
     }
 
