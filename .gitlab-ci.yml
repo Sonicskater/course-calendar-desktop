@@ -45,7 +45,7 @@ Test:
 Java FX Distributions:
   stage: jar
   script:
-    - ./gradlew build --no-daemon
+    - ./gradlew shadowJar --no-daemon
   artifacts:
     paths:
-      - build/distributions
+      - build/libs
