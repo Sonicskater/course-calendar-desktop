@@ -92,7 +92,8 @@ final class SQLiteStrategy implements IDBConnection {
 	}
 	private Connection connection;
 	//Generates unique key id
-	@Override
+	@SuppressWarnings("SqlResolve")
+    @Override
 	public int GetNewKey(EDBTypeCode code) throws SQLException{
 		String type = code.getString().toLowerCase()+"s";
 		ResultSet rs = connection.createStatement().executeQuery("SELECT IFNULL(MAX(id),0) as id FROM "+type);
@@ -235,7 +236,7 @@ final class SQLiteStrategy implements IDBConnection {
 	@Override
 	public void DeleteFromCode(DBUniqueID code) {
 	    try {
-            String sql = "";
+            String sql;
             PreparedStatement prst;
             switch (code.getTypeCode()) {
                 case DEPARTMENT:
@@ -313,7 +314,6 @@ final class SQLiteStrategy implements IDBConnection {
                     prst.execute();
                     return;
                 case USER:
-                    sql = "DELETE FROM users WHERE id = ?;";
                     break;
             }
 
@@ -325,7 +325,7 @@ final class SQLiteStrategy implements IDBConnection {
 	}
 
 	@Override
-	public void SetDepFromCode(DBUniqueID code, Department department) throws IDTypeMismatchExcception {
+	public void SetDepFromCode(DBUniqueID code, Department department) {
         try {
             if (code.getTypeCode() != EDBTypeCode.DEPARTMENT){
                 throw new IDTypeMismatchExcception();
@@ -353,7 +353,7 @@ final class SQLiteStrategy implements IDBConnection {
 	}
 
 	@Override
-	public void SetCourseFromCode(DBUniqueID code, Course course) throws IDTypeMismatchExcception {
+	public void SetCourseFromCode(DBUniqueID code, Course course) {
 		try {
             if (code.getTypeCode() != EDBTypeCode.COURSE){
                 throw new IDTypeMismatchExcception();
@@ -373,18 +373,12 @@ final class SQLiteStrategy implements IDBConnection {
 			for (DBUniqueID c : course.getPreReqs()){
                 sql = "REPLACE INTO prereqs(courseID,preID) \n"
                         + "VALUES (?,?);";
-                PreparedStatement prst = connection.prepareStatement(sql);
-                prst.setInt(1,course.getId().getNumCode());
-                prst.setInt(2,c.getNumCode());
-                prst.execute();
+                insertReqs(course, sql, c);
             }
             for (DBUniqueID c : course.getAntiReqs()){
                 sql = "REPLACE INTO antireqs(courseID,antiID) \n"
                         + "VALUES (?,?);";
-                PreparedStatement prst = connection.prepareStatement(sql);
-                prst.setInt(1,course.getId().getNumCode());
-                prst.setInt(2,c.getNumCode());
-                prst.execute();
+                insertReqs(course, sql, c);
             }
 
 		}catch (Exception e){
@@ -392,8 +386,15 @@ final class SQLiteStrategy implements IDBConnection {
 		}
 	}
 
-	@Override
-	public void SetProgramFromCode(DBUniqueID code, Program program) throws IDTypeMismatchExcception {
+    private void insertReqs(Course course, String sql, DBUniqueID c) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setInt(1,course.getId().getNumCode());
+        preparedStatement.setInt(2,c.getNumCode());
+        preparedStatement.execute();
+    }
+
+    @Override
+	public void SetProgramFromCode(DBUniqueID code, Program program) {
 	    try {
             if (code.getTypeCode() != EDBTypeCode.PROGRAM){
                 throw new IDTypeMismatchExcception();
@@ -430,19 +431,19 @@ final class SQLiteStrategy implements IDBConnection {
 	}
 
 	@Override
-	public void SetUserFromCode(DBUniqueID code, User user) throws IDTypeMismatchExcception {
+	public void SetUserFromCode(DBUniqueID code, User user) {
         try{
             if (code.getTypeCode() != EDBTypeCode.USER){
                 throw new IDTypeMismatchExcception();
             }
             String sql = "REPLACE INTO users(id,user,pass) \n"
                     + "VALUES (?,?,?);";
-            PreparedStatement prst = connection.prepareStatement(sql);
-            prst.setInt(1,code.getNumCode());
-            prst.setString(2,user.getUser());
-            prst.setString(3,user.getPass());
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1,code.getNumCode());
+            preparedStatement.setString(2,user.getUser());
+            preparedStatement.setString(3,user.getPass());
 
-            prst.execute();
+            preparedStatement.execute();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -528,26 +529,26 @@ final class SQLiteStrategy implements IDBConnection {
     public void deleteReqOpt(DBUniqueID program, DBUniqueID course) {
 	    try {
 
-            String sql = "";
-            PreparedStatement prst;
+            String sql;
+            PreparedStatement preparedStatement;
 
             sql = "DELETE FROM required WHERE programID = ? AND reqID = ?;";
 
-            prst = connection.prepareStatement(sql);
+            preparedStatement = connection.prepareStatement(sql);
 
 
-            prst.setInt(1, program.getNumCode());
-            prst.setInt(2, course.getNumCode());
+            preparedStatement.setInt(1, program.getNumCode());
+            preparedStatement.setInt(2, course.getNumCode());
 
-            prst.execute();
+            preparedStatement.execute();
 
 
             sql = "DELETE FROM optional WHERE programID = ? AND optID = ?;";
-            prst = connection.prepareStatement(sql);
-            prst.setInt(1, program.getNumCode());
-            prst.setInt(2, course.getNumCode());
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, program.getNumCode());
+            preparedStatement.setInt(2, course.getNumCode());
 
-            prst.execute();
+            preparedStatement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

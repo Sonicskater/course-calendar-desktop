@@ -3,7 +3,6 @@ package view;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import model.database.DBUniqueID;
 import model.database.DataBase;
@@ -14,7 +13,6 @@ import model.types.Department;
 import model.types.Program;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -56,7 +54,7 @@ public class AddView implements Initializable {
     TextArea courseDesc;
 
 
-    public UserView view;
+    UserView view;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -214,7 +212,7 @@ public class AddView implements Initializable {
         updateUi();
     }
 
-    public void updateUi(){
+    private void updateUi(){
 
         List<DBUniqueID> ids = DataBase.INSTANCE.getDepartmentIDs();
         ArrayObservableList<Department> deps = new ArrayObservableList<>();
@@ -231,18 +229,18 @@ public class AddView implements Initializable {
         departmentComboBox.setItems(deps);
 
         ids = DataBase.INSTANCE.getProgramIDs();
-        ArrayObservableList<Program> progs = new ArrayObservableList<>();
+        ArrayObservableList<Program> programs = new ArrayObservableList<>();
         for (DBUniqueID id :
                 ids) {
             try {
                 Program d = DataBase.INSTANCE.getProgram(id);
-                progs.add(d);
+                programs.add(d);
             } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
                 idTypeMismatchExcception.printStackTrace();
             }
         }
 
-        programToAddTo.setItems(progs);
+        programToAddTo.setItems(programs);
 
         ids = DataBase.INSTANCE.getCourseIDs();
         ArrayObservableList<Course> courses = new ArrayObservableList<>();
