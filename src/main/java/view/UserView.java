@@ -114,7 +114,9 @@ public class UserView implements Initializable {
         yearCol.setCellValueFactory(new PropertyValueFactory("courseYear"));
 
         table.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> displayCourse((newValue!=null)? newValue : oldValue));
+                (observable, oldValue, newValue) -> {
+            displayCourse((newValue!=null)? newValue : oldValue);
+        });
 
         updateTable();
 
@@ -201,7 +203,8 @@ public class UserView implements Initializable {
 */
     // Runs when the delete button is clicked
     public void delete() {
-        DataBase.INSTANCE.deleteFromID(table.getSelectionModel().selectedItemProperty().get().course.getId());
+        CombinedData combinedData = table.getSelectionModel().selectedItemProperty().get();
+        DataBase.INSTANCE.removeRelation(combinedData.program, combinedData.course);
         updateTable();
     }
 /*

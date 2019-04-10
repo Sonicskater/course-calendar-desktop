@@ -52,6 +52,8 @@ public interface IDBConnection {
 	ArrayList<DBUniqueID> getAllProgramIDs();
 	ArrayList<DBUniqueID> getAllDepartmentIDs();
 
+	void deleteReqOpt(DBUniqueID program, DBUniqueID course);
+
 
 
 }

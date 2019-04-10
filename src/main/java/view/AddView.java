@@ -29,6 +29,12 @@ public class AddView implements Initializable {
     ComboBox<Department> departmentComboBox = new ComboBox<>();
 
     @FXML
+    ComboBox<Course> reqCourse = new ComboBox<>();
+
+    @FXML
+    ComboBox<Course> modCourse = new ComboBox<>();
+
+    @FXML
     ComboBox<Course> courseToAdd;
 
     @FXML
@@ -39,6 +45,15 @@ public class AddView implements Initializable {
 
     @FXML
     TextArea progDesc;
+
+    @FXML
+    TextField courseTitle;
+
+    @FXML
+    TextField courseCode;
+
+    @FXML
+    TextArea courseDesc;
 
 
     public UserView view;
@@ -89,6 +104,12 @@ public class AddView implements Initializable {
         courseToAdd.setButtonCell(courseConverter.call(null));
         courseToAdd.setCellFactory(courseConverter);
 
+        reqCourse.setButtonCell(courseConverter.call(null));
+        reqCourse.setCellFactory(courseConverter);
+
+        modCourse.setButtonCell(courseConverter.call(null));
+        modCourse.setCellFactory(courseConverter);
+
                 updateUi();
     }
 
@@ -120,6 +141,75 @@ public class AddView implements Initializable {
         } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
             idTypeMismatchExcception.printStackTrace();
         }
+        view.updateTable();
+        updateUi();
+    }
+
+    public void addReq(){
+
+        Program selectedProgram = programToAddTo.getSelectionModel().getSelectedItem();
+
+        Course selectedCourse = courseToAdd.getSelectionModel().getSelectedItem();
+
+        try {
+            selectedProgram.addRequired(selectedCourse.getId());
+        }catch (Exception e){
+            //No course selected.
+        }
+
+
+        selectedProgram.save();
+        view.updateTable();
+        updateUi();
+    }
+
+    public void addOpt(){
+        Program selectedProgram = programToAddTo.getSelectionModel().getSelectedItem();
+
+        Course selectedCourse = courseToAdd.getSelectionModel().getSelectedItem();
+
+        try {
+            selectedProgram.addOptional(selectedCourse.getId());
+        }catch (Exception e){
+            //No course selected.
+        }
+        selectedProgram.save();
+        view.updateTable();
+        updateUi();
+    }
+
+    public void addCourse(){
+        try {
+            Course course = new Course(new DBUniqueID(EDBTypeCode.COURSE));
+
+            course.setCode(courseCode.getText());
+            course.setTitle(courseTitle.getText());
+            course.setDescription(courseDesc.getText());
+
+            course.save();
+        } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+            idTypeMismatchExcception.printStackTrace();
+        }
+        view.updateTable();
+        updateUi();
+    }
+
+    public void addAnti(){
+        Course selectedItem = modCourse.getSelectionModel().getSelectedItem();
+
+        selectedItem.addAntiReq(courseToAdd.getSelectionModel().getSelectedItem().getId());
+
+        selectedItem.save();
+        view.updateTable();
+        updateUi();
+    }
+
+    public void addPre(){
+        Course selectedItem = modCourse.getSelectionModel().getSelectedItem();
+
+        selectedItem.addPreReq(courseToAdd.getSelectionModel().getSelectedItem().getId());
+
+        selectedItem.save();
         view.updateTable();
         updateUi();
     }
@@ -166,7 +256,9 @@ public class AddView implements Initializable {
             }
         }
 
+        reqCourse.setItems(courses);
         courseToAdd.setItems(courses);
+        modCourse.setItems(courses);
     }
 
 

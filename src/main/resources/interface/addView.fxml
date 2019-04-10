@@ -95,12 +95,12 @@
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </ComboBox>
-                              <Button mnemonicParsing="false" onAction="#addProg" prefHeight="25.0" prefWidth="500.0" text="Add Required">
+                              <Button mnemonicParsing="false" onAction="#addReq" prefHeight="25.0" prefWidth="500.0" text="Add Required">
                                  <effect>
                                     <ColorAdjust hue="0.48" saturation="0.4" />
                                  </effect>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#addProg" prefHeight="25.0" prefWidth="500.0" text="Add Optional">
+                              <Button mnemonicParsing="false" onAction="#addOpt" prefHeight="25.0" prefWidth="500.0" text="Add Optional">
                                  <effect>
                                     <ColorAdjust hue="0.48" saturation="0.4" />
                                  </effect>
@@ -126,17 +126,22 @@
                                     <Insets bottom="5.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Department Name">
+                              <TextField fx:id="courseCode" prefHeight="25.0" prefWidth="200.0" promptText="Course Code">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextField>
-                              <TextArea prefHeight="75.0" prefWidth="200.0" text="Program Description">
+                              <TextField fx:id="courseTitle" prefHeight="25.0" prefWidth="200.0" promptText="Course Title">
+                                 <effect>
+                                    <ColorAdjust hue="-0.83" saturation="0.1" />
+                                 </effect>
+                              </TextField>
+                              <TextArea fx:id="courseDesc" prefHeight="75.0" prefWidth="200.0" promptText="Course Description">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </TextArea>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Course">
+                              <Button mnemonicParsing="false" onAction="#addCourse" prefHeight="25.0" prefWidth="500.0" text="Add Course">
                                  <effect>
                                     <ColorAdjust hue="-0.76" saturation="0.4" />
                                  </effect>
@@ -153,20 +158,18 @@
                                     <Insets bottom="5.0" top="10.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label prefHeight="17.0" prefWidth="273.0" text="Course" />
-                              <ComboBox prefHeight="25.0" prefWidth="262.0">
+                              <Label prefHeight="17.0" prefWidth="273.0" text="Course To Modify" />
+                              <ComboBox fx:id="modCourse" prefHeight="25.0" prefWidth="262.0">
                                  <effect>
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </ComboBox>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Antirequisite Name">
-                                 <VBox.margin>
-                                    <Insets top="53.0" />
-                                 </VBox.margin>
+                              <Label prefHeight="17.0" prefWidth="273.0" text="Course To Add" />
+                              <ComboBox fx:id="reqCourse" prefHeight="25.0" prefWidth="262.0">
                                  <effect>
-                                    <ColorAdjust saturation="0.1" />
+                                    <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
-                              </TextField>
+                              </ComboBox>
                               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Antirequisite">
                                  <effect>
                                     <ColorAdjust hue="0.03" saturation="0.4" />
@@ -175,14 +178,6 @@
                                     <Insets />
                                  </VBox.margin>
                               </Button>
-                              <TextField prefHeight="25.0" prefWidth="200.0" promptText="Prerequisite Name">
-                                 <VBox.margin>
-                                    <Insets top="53.0" />
-                                 </VBox.margin>
-                                 <effect>
-                                    <ColorAdjust hue="0.6" saturation="0.1" />
-                                 </effect>
-                              </TextField>
                               <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Prerequisite">
                                  <effect>
                                     <ColorAdjust hue="0.48" saturation="0.4" />

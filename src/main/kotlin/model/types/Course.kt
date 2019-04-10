@@ -4,8 +4,9 @@ import model.database.*
 import java.util.*
 
 class Course @Throws(IDTypeMismatchExcception::class)
-constructor(id: DBUniqueID, var departmentID : DBUniqueID) : DBData(id, EDBTypeCode.COURSE)
+constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.COURSE)
 {
+    var departmentID : DBUniqueID = DBUniqueID(EDBTypeCode.DEPARTMENT)
     var code : String = ""
     var number : Int = 0
 
@@ -33,7 +34,7 @@ constructor(id: DBUniqueID, var departmentID : DBUniqueID) : DBData(id, EDBTypeC
     fun removePreReq(id : DBUniqueID) = prereqs.remove(id)
 
     fun getName(): String {
-        return "$code $number"
+        return code
     }
     var title = ""
     var description = ""

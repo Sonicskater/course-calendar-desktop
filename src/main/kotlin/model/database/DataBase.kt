@@ -93,4 +93,8 @@ object DataBase {
         return db
     }
 
+    fun removeRelation(program: Program,course: Course){
+        DBProvider.connection.deleteReqOpt(program.id,course.id)
+    }
+
 }

@@ -133,7 +133,7 @@ final class SQLiteStrategy implements IDBConnection {
 		String sql = "SELECT * FROM courses WHERE id = " + code.getNumCode();
 		try {
 			ResultSet rs = connection.createStatement().executeQuery(sql);
-			Course course = new Course(code, new DBUniqueID(EDBTypeCode.DEPARTMENT));
+			Course course = new Course(code);
 			course.setTitle(rs.getString("title"));
 			course.setDescription(rs.getString("description"));
 			DBUniqueID id = new DBUniqueID(EDBTypeCode.DEPARTMENT);
@@ -524,6 +524,35 @@ final class SQLiteStrategy implements IDBConnection {
         return ids;
 	}
 
+    @Override
+    public void deleteReqOpt(DBUniqueID program, DBUniqueID course) {
+	    try {
 
-	//Implement methods from interface, as well as any additional helper methods here. Any methods here and not in the interface should be private.
+            String sql = "";
+            PreparedStatement prst;
+
+            sql = "DELETE FROM required WHERE programID = ? AND reqID = ?;";
+
+            prst = connection.prepareStatement(sql);
+
+
+            prst.setInt(1, program.getNumCode());
+            prst.setInt(2, course.getNumCode());
+
+            prst.execute();
+
+
+            sql = "DELETE FROM optional WHERE programID = ? AND optID = ?;";
+            prst = connection.prepareStatement(sql);
+            prst.setInt(1, program.getNumCode());
+            prst.setInt(2, course.getNumCode());
+
+            prst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    //Implement methods from interface, as well as any additional helper methods here. Any methods here and not in the interface should be private.
 }
