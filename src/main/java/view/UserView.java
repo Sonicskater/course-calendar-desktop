@@ -150,7 +150,7 @@ public class UserView implements Initializable {
         programDesc.setText(newValue.program.getDescription());
     }
 
-    private void updateTable() {
+    void updateTable() {
         List<CombinedData> data = MAIN_CONTROLLER.getData();
         tableList = new ArrayObservableList<>();
         tableList.addAll(data);
