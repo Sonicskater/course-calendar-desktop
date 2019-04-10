@@ -20,12 +20,12 @@
                <children>
                   <TableView fx:id="table" prefHeight="552.0" prefWidth="780.0">
                      <columns>
-                        <TableColumn fx:id="departmentCol" prefWidth="130.0" text="Department" />
-                        <TableColumn fx:id="programCol" prefWidth="130.0" text="Program" />
-                        <TableColumn fx:id="courseCol" prefWidth="125.0" text="Course" />
-                        <TableColumn fx:id="codeCol" minWidth="5.0" prefWidth="125.0" text="Code" />
-                        <TableColumn fx:id="requiredCol" prefWidth="125.0" text="Required" />
-                        <TableColumn fx:id="yearCol" prefWidth="125.0" text="Year" />
+                        <TableColumn fx:id="departmentCol" prefWidth="178.0" text="Department" />
+                        <TableColumn fx:id="programCol" prefWidth="167.0" text="Program" />
+                        <TableColumn fx:id="courseCol" prefWidth="144.0" text="Course" />
+                        <TableColumn fx:id="codeCol" minWidth="5.0" prefWidth="116.0" text="Code" />
+                        <TableColumn fx:id="requiredCol" prefWidth="94.0" text="Required" />
+                        <TableColumn fx:id="yearCol" prefWidth="61.0" text="Year" />
                      </columns>
                   </TableView>
                   <VBox prefHeight="528.0" prefWidth="253.0" spacing="3.0">
@@ -50,7 +50,7 @@
                         </Label>
                         <ScrollPane prefHeight="100.0" prefWidth="228.0">
                            <content>
-                              <Label fx:id="descriptionLabel" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                              <Label fx:id="courseDesc" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
                            </content>
                            <effect>
                               <ColorAdjust brightness="0.38" />
@@ -80,7 +80,7 @@
                         </Label>
                         <ScrollPane prefHeight="100.0" prefWidth="228.0">
                            <content>
-                              <Label fx:id="descriptionLabel1" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                              <Label fx:id="programDesc" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
                            </content>
                         </ScrollPane>
                      </children>
@@ -102,7 +102,7 @@
                               <Font size="16.0" />
                            </font>
                         </Button>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Delete">
+                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="40.0" prefWidth="100.0" text="Delete">
                            <effect>
                               <ColorAdjust contrast="0.05" hue="-0.09" saturation="0.4" />
                            </effect>

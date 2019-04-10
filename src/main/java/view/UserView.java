@@ -20,12 +20,11 @@ import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import jfxtras.styles.jmetro8.JMetro;
-import model.database.DBData;
-import model.database.DataBase;
-import model.database.EDBTypeCode;
+import model.database.*;
 import model.types.Course;
 import model.types.Program;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -36,6 +35,7 @@ import java.util.ResourceBundle;
 public class UserView implements Initializable {
     private static final int STUDENT = 0;
     private static final int FACULTY = 1;
+    private final MainController MAIN_CONTROLLER = new MainController();
 
     private int userType; // Type of user, either STUDENT or FACULTY
     @FXML private AnchorPane root;
@@ -48,6 +48,8 @@ public class UserView implements Initializable {
     @FXML private RadioButton courseRButton;
 */
     // Sidebar information
+    @FXML private Label courseDesc;
+    @FXML private Label programDesc;
     @FXML private Label descriptionLabel;
     @FXML private ListView prereqListView = new ListView();
     @FXML private ListView antireqListView = new ListView();
@@ -111,19 +113,49 @@ public class UserView implements Initializable {
         requiredCol.setCellValueFactory(new PropertyValueFactory("required"));
         yearCol.setCellValueFactory(new PropertyValueFactory("courseYear"));
 
-        List<CombinedData> data = new MainController().getData();
+        table.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+            displayCourse(newValue);
+        });
 
-        for (CombinedData dat : data){
-            tableList.add(dat);
+        updateTable();
+
+
+        //new JMetro(JMetro.Style.LIGHT).applyTheme(root);
+
+    }
+
+    private void displayCourse(CombinedData newValue) {
+        courseDesc.setText(newValue.course.getDescription());
+        ArrayObservableList<String> preList = new ArrayObservableList<>();
+        for (DBUniqueID id : newValue.course.getPreReqs()) {
+            try {
+                preList.add(DataBase.INSTANCE.getCourse(id).getName());
+            } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+                idTypeMismatchExcception.printStackTrace();
+            }
         }
+        prereqListView.setItems(preList);
 
+        ArrayObservableList<String> antiList = new ArrayObservableList<>();
+        for (DBUniqueID id : newValue.course.getAntiReqs()) {
+            try {
+                antiList.add(DataBase.INSTANCE.getCourse(id).getName());
+            } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+                idTypeMismatchExcception.printStackTrace();
+            }
+        }
+        antireqListView.setItems(antiList);
+
+        programDesc.setText(newValue.program.getDescription());
+    }
+
+    private void updateTable() {
+        List<CombinedData> data = MAIN_CONTROLLER.getData();
+        tableList = new ArrayObservableList<>();
+        tableList.addAll(data);
         System.out.println(tableList);
-
         table.setItems(tableList);
-
-
-        new JMetro(JMetro.Style.LIGHT).applyTheme(root);
-
     }
 
     // Temporary information to use before loading from database
@@ -166,18 +198,13 @@ public class UserView implements Initializable {
             addCourse();
         }
     }
-
+*/
     // Runs when the delete button is clicked
     public void delete() {
-        if (this.actionGroup.getSelectedToggle().equals(this.departRButton)) {
-            deleteDepartment();
-        } else if (this.actionGroup.getSelectedToggle().equals(this.programRButton)) {
-            deleteProgram();
-        } else if (this.actionGroup.getSelectedToggle().equals(this.courseRButton)) {
-            deleteCourse();
-        }
+        DataBase.INSTANCE.deleteFromID(table.getSelectionModel().selectedItemProperty().get().course.getId());
+        updateTable();
     }
-
+/*
     // Runs when the edit button is clicked
     public void edit() {
         if (this.actionGroup.getSelectedToggle().equals(this.departRButton)) {

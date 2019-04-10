@@ -48,18 +48,18 @@ public class MainController {
                         idTypeMismatchExcception.printStackTrace();
                         continue;
                     }
-                    dataOut.add(new CombinedData(dep,program,course,false));
+                    dataOut.add(new CombinedData(dep,program,course,true));
 
                 }
                 List<DBUniqueID> optional = program.getOptional();
-                for(DBUniqueID courseId : required) {
+                for(DBUniqueID courseId :optional) {
                     Course course;
                     try {
                         course = DataBase.INSTANCE.getCourse(courseId);
                     } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
                         continue;
                     }
-                    dataOut.add(new CombinedData(dep,program,course,true));
+                    dataOut.add(new CombinedData(dep,program,course,false));
                 }
 
             }

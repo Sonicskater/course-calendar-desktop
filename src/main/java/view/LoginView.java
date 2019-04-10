@@ -49,7 +49,7 @@ public class LoginView implements Initializable {
         badLogInLabel.setVisible(false); // Don't show login failed message on start
 
         //Apply 3rd-party theme
-        new JMetro(JMetro.Style.LIGHT).applyTheme(root);
+        //new JMetro(JMetro.Style.LIGHT).applyTheme(root);
     }
 
     // Runs when login button is clicked

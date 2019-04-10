@@ -29,9 +29,6 @@ object DataBase {
     private fun DBUniqueID.isNotCached(): Boolean {
         return true
     }
-    private fun DBUniqueID.isCached(): Boolean{
-        return cache.containsKey(this)
-    }
     //kotlin doesn't have a throws syntax, so java code is made aware through annotation
 	//inline function is used to share code between calls while also working around jvm generic type erasure.
     //inline function copies the below code to any calling point instead of calling function normally (similar to a macro)

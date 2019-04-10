@@ -21,65 +21,65 @@ final class SQLiteStrategy implements IDBConnection {
 			//Create any missing database tables.
 
 			String sql = "CREATE TABLE IF NOT EXISTS courses (\n"
-					+ " id integer PRIMARY KEY, \n"
+					+ " id int PRIMARY KEY, \n"
 					+ " code text,\n"
-					+ " number integer, \n"
+					+ " number int, \n"
 					+ " title text, \n"
 					+ " description text, \n"
-					+ " departmentID integer \n"
-                    + " year integer \n"
+					+ " departmentID int, \n"
+                    + " year int \n"
                     +");";
 			connection.createStatement().execute(sql);
 			sql = "CREATE TABLE IF NOT EXISTS departments (\n"
-					+ " id integer PRIMARY KEY, \n"
+					+ " id int PRIMARY KEY, \n"
 					+ " name text \n"
 					+");";
 			connection.createStatement().execute(sql);
 			sql = "CREATE TABLE IF NOT EXISTS users (\n"
-					+ " id integer PRIMARY KEY, \n"
+					+ " id int PRIMARY KEY, \n"
 					+ " user text, \n"
 					+ " pass text, \n"
                     + " type text \n"
 					+");";
 			connection.createStatement().execute(sql);
 			sql = "CREATE TABLE IF NOT EXISTS programs (\n"
-					+ " id integer PRIMARY KEY, \n"
+					+ " id int PRIMARY KEY, \n"
 					+ " name text, \n"
 					+ " description text \n"
 					+");";
 			connection.createStatement().execute(sql);
 
 			sql = "CREATE TABLE IF NOT EXISTS antireqs (\n"
-                    + " courseID integer, \n"
-                    + " antiID integer, \n"
+                    + " courseID int, \n"
+                    + " antiID int, \n"
                     + " PRIMARY KEY (courseID,antiID) \n"
                     + ");";
 			connection.createStatement().execute(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS prereqs (\n"
-                    + " courseID integer, \n"
-                    + " preID integer, \n"
+                    + " courseID int, \n"
+                    + " preID int, \n"
                     + " PRIMARY KEY (courseID,preID) \n"
                     + ");";
             connection.createStatement().execute(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS required(\n"
-                    + " programID integer, \n"
-                    + " reqID integer, \n"
+                    + " programID int, \n"
+                    + " reqID int, \n"
                     + " PRIMARY KEY (programID,reqID) \n"
                     + ");";
             connection.createStatement().execute(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS optional (\n"
-                    + " programID integer, \n"
-                    + " optID integer, \n"
+                    + " programID int, \n"
+                    + " optID int, \n"
                     + " PRIMARY KEY (programID,optID) \n"
                     + ");";
             connection.createStatement().execute(sql);
 
             sql = "CREATE TABLE IF NOT EXISTS depPrograms (\n"
-                    + " depID integer, \n"
-                    + " progID integer, \n"
+                    + " depID int, \n"
+                    + " progID int, \n"
                     + " PRIMARY KEY (depID,progID) \n"
                     + ");";
             connection.createStatement().execute(sql);
@@ -140,6 +140,7 @@ final class SQLiteStrategy implements IDBConnection {
 			id.setNumCode(rs.getInt("departmentID"));
 			course.setDepartmentID(id);
 			course.setCode(rs.getString("code"));
+            course.setNumber(rs.getInt("number"));
 			course.setYear(rs.getInt("year"));
 
 
@@ -258,6 +259,31 @@ final class SQLiteStrategy implements IDBConnection {
                     prst.execute();
 
 
+                    sql = "DELETE FROM required WHERE reqID = ?;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+
+                    sql = "DELETE FROM optional WHERE optID = ?;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+                    sql = "DELETE FROM prereqs WHERE courseID = ? OR preID = ?;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+                    sql = "DELETE FROM antireqs WHERE courseID = ? OR antiID = ?;";
+                    prst = connection.prepareStatement(sql);
+                    prst.setInt(1,code.getNumCode());
+
+                    prst.execute();
+
+
 
                     return;
                 case PROGRAM:
@@ -268,19 +294,19 @@ final class SQLiteStrategy implements IDBConnection {
 
                     prst.execute();
 
-                    sql = "DELETE FROM depPrograms WHERE progID = ?1;";
+                    sql = "DELETE FROM depPrograms WHERE progID = ?;";
                     prst = connection.prepareStatement(sql);
                     prst.setInt(1,code.getNumCode());
 
                     prst.execute();
 
-                    sql = "DELETE FROM required WHERE programID = ?1;";
+                    sql = "DELETE FROM required WHERE programID = ?;";
                     prst = connection.prepareStatement(sql);
                     prst.setInt(1,code.getNumCode());
 
                     prst.execute();
 
-                    sql = "DELETE FROM optional WHERE programID = ?1;";
+                    sql = "DELETE FROM optional WHERE programID = ?;";
                     prst = connection.prepareStatement(sql);
                     prst.setInt(1,code.getNumCode());
 
