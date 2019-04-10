@@ -114,9 +114,7 @@ public class UserView implements Initializable {
         yearCol.setCellValueFactory(new PropertyValueFactory("courseYear"));
 
         table.getSelectionModel().selectedItemProperty().addListener(
-                (observable, oldValue, newValue) -> {
-            displayCourse(newValue);
-        });
+                (observable, oldValue, newValue) -> displayCourse((newValue!=null)? newValue : oldValue));
 
         updateTable();
 
@@ -183,6 +181,7 @@ public class UserView implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getClassLoader().getResource("interface/addView.fxml"));
         Parent root1 = fxmlLoader.load();
+        ((AddView)fxmlLoader.getController()).view = this;
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.show();

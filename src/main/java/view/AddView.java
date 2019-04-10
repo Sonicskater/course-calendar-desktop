@@ -34,9 +34,14 @@ public class AddView implements Initializable {
     @FXML
     ComboBox<Program> programToAddTo;
 
+    @FXML
+    TextField progName;
+
+    @FXML
+    TextArea progDesc;
 
 
-    UserView view;
+    public UserView view;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,10 +102,26 @@ public class AddView implements Initializable {
             idTypeMismatchExcception.printStackTrace();
         }
         view.updateTable();
+        updateUi();
     }
 
     public void addProg(){
+        try{
+            Program program = new Program(new DBUniqueID(EDBTypeCode.PROGRAM));
 
+            Department selectedItem = departmentComboBox.getSelectionModel().getSelectedItem();
+            selectedItem.addProgram(program.getId());
+            selectedItem.save();
+
+            program.setName(progName.getText());
+            program.setDescription(progDesc.getText());
+            program.save();
+
+        } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+            idTypeMismatchExcception.printStackTrace();
+        }
+        view.updateTable();
+        updateUi();
     }
 
     public void updateUi(){
