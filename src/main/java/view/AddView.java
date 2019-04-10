@@ -197,7 +197,7 @@ public class AddView implements Initializable {
     public void addAnti(){
         Course selectedItem = modCourse.getSelectionModel().getSelectedItem();
 
-        selectedItem.addAntiReq(courseToAdd.getSelectionModel().getSelectedItem().getId());
+        selectedItem.addAntiReq(reqCourse.getSelectionModel().getSelectedItem().getId());
 
         selectedItem.save();
         view.updateTable();
@@ -207,7 +207,7 @@ public class AddView implements Initializable {
     public void addPre(){
         Course selectedItem = modCourse.getSelectionModel().getSelectedItem();
 
-        selectedItem.addPreReq(courseToAdd.getSelectionModel().getSelectedItem().getId());
+        selectedItem.addPreReq(reqCourse.getSelectionModel().getSelectedItem().getId());
 
         selectedItem.save();
         view.updateTable();

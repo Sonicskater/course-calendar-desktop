@@ -170,7 +170,7 @@
                                     <ColorAdjust hue="-0.83" saturation="0.1" />
                                  </effect>
                               </ComboBox>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Antirequisite">
+                              <Button mnemonicParsing="false" onAction="#addAnti" prefHeight="25.0" prefWidth="500.0" text="Add Antirequisite">
                                  <effect>
                                     <ColorAdjust hue="0.03" saturation="0.4" />
                                  </effect>
@@ -178,7 +178,7 @@
                                     <Insets />
                                  </VBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="500.0" text="Add Prerequisite">
+                              <Button mnemonicParsing="false" onAction="#addPre" prefHeight="25.0" prefWidth="500.0" text="Add Prerequisite">
                                  <effect>
                                     <ColorAdjust hue="0.48" saturation="0.4" />
                                  </effect>
