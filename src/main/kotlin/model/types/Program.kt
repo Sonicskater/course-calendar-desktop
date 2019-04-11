@@ -16,18 +16,18 @@ constructor(id: DBUniqueID) : DBData(id, EDBTypeCode.PROGRAM){
     private var optional = ArrayList<DBUniqueID>()
 
     fun addRequired(id : DBUniqueID){
-        if (id.checkType(EDBTypeCode.COURSE) && !(id in required)) {
+        if (id.checkType(EDBTypeCode.COURSE) && id !in required && id !in optional) {
             required.add(id)
         }
     }
     fun addOptional(id : DBUniqueID){
-        if (id.checkType(EDBTypeCode.COURSE) && !(id in optional)) {
+        if (id.checkType(EDBTypeCode.COURSE) && id !in optional && id !in required) {
             optional.add(id)
         }
     }
-    fun getRequired() = Collections.unmodifiableList(optional)
+    fun getRequired() = Collections.unmodifiableList(required)
 
-    fun getOptional() = Collections.unmodifiableList(required)
+    fun getOptional() = Collections.unmodifiableList(optional)
 
     fun removeRequired(id : DBUniqueID) = optional.remove(id)
 
