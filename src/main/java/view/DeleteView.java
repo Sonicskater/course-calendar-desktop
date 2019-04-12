@@ -113,6 +113,18 @@ public class DeleteView implements Initializable {
     }
 
     public void deletePrereq(){
+        /*try{
+            DBUniqueID prereq = prereq.getSelectionModel().getSelectedItem().getCode();
+            Course course = prereqOfCourse.getSelectionModel().getSelectedItem();
+            course.removePreReq(prereq);
+        } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
+            idTypeMismatchExcception.printStackTrace();
+        }*/
+        view.updateTable();
+        updateUi();
+
+
+
         System.out.println("deleting prereq");
         view.updateTable();
         updateUi();

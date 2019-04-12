@@ -18,7 +18,7 @@
          <children>
             <HBox prefHeight="555.0" prefWidth="1000.0" spacing="5.0">
                <children>
-                  <TableView fx:id="table" prefHeight="552.0" prefWidth="780.0">
+                  <TableView fx:id="table" prefHeight="552.0" prefWidth="783.0">
                      <columns>
                         <TableColumn fx:id="departmentCol" prefWidth="178.0" text="Department" />
                         <TableColumn fx:id="programCol" prefWidth="167.0" text="Program" />
