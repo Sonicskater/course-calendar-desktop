@@ -2,7 +2,8 @@ package view;
 
 import controller.CombinedData;
 import controller.MainController;
-import javafx.beans.value.ObservableValue;
+import model.database.*;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,23 +13,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.scene.control.cell.TreeItemPropertyValueFactory;
 
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
-import jfxtras.styles.jmetro8.JMetro;
-import model.database.*;
-import model.types.Course;
-import model.types.Program;
-
-import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -38,15 +28,12 @@ public class UserView implements Initializable {
     private final MainController MAIN_CONTROLLER = new MainController();
 
     private int userType; // Type of user, either STUDENT or FACULTY
-    @FXML private AnchorPane root;
     @FXML private HBox facultyPane; // Pane with faculty actions
-/*
-    // Group of radio buttons for faculty actions
-    @FXML private ToggleGroup actionGroup;
-    @FXML private RadioButton departRButton;
-    @FXML private RadioButton programRButton;
-    @FXML private RadioButton courseRButton;
-*/
+
+    @FXML private Button addButton;
+    @FXML private Button deleteButton;
+    @FXML private Button logoutButton;
+
     // Sidebar information
     @FXML private Label courseDesc;
     @FXML private Label programDesc;
@@ -61,14 +48,7 @@ public class UserView implements Initializable {
     @FXML private TableColumn<String, CombinedData> codeCol;
     @FXML private TableColumn<String, CombinedData> requiredCol;
     @FXML private TableColumn<String, CombinedData> yearCol;
-/*
-    // Tree information
-    @FXML private TreeTableView<Program> tableView;
-    @FXML private TreeTableColumn<Program, String> progCol;
-    @FXML private TreeTableColumn<String, String> yearCol;
-    @FXML private TreeTableColumn<String, String> codeCol;
-    @FXML private TreeTableColumn<String, String> titleCol;
-*/
+
     private ArrayObservableList<CombinedData> tableList = new ArrayObservableList<>();
     // Used by LoginView to set the user type
     public void setUserType(int userType) {
@@ -84,28 +64,6 @@ public class UserView implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-/*        updateSelectedItemInfo(); // updates sidebar
-
-        // Group of radio buttons for faculty actions
-        actionGroup = new ToggleGroup();
-        departRButton.setToggleGroup(actionGroup);
-        programRButton.setToggleGroup(actionGroup);
-        courseRButton.setToggleGroup(actionGroup);
-        actionGroup.selectToggle(departRButton);
-
-        // Testing TreeTableView
-        progCol.setCellValueFactory(new TreeItemPropertyValueFactory<>("name"));
-        try {
-            Program prog = new Program(DataBase.INSTANCE.getNewID(EDBTypeCode.PROGRAM));
-            prog.setName("TEST PROG");
-            TreeItem<Program> item = new TreeItem<>(prog);
-            tableView.setRoot(item);
-        }catch (Exception e){
-
-        }
-*/
-
-
         departmentCol.setCellValueFactory(new PropertyValueFactory("departmentName"));
         programCol.setCellValueFactory(new PropertyValueFactory("programName"));
         courseCol.setCellValueFactory(new PropertyValueFactory("courseName"));
@@ -117,12 +75,14 @@ public class UserView implements Initializable {
                 (observable, oldValue, newValue) -> {
             displayCourse((newValue!=null)? newValue : oldValue);
         });
-
         updateTable();
 
-
-        //new JMetro(JMetro.Style.LIGHT).applyTheme(root);
-
+        // Set styling for elements
+        table.setStyle("-fx-background-color: #F3FFFF;");
+        facultyPane.setStyle("-fx-background-color: #404040;");
+        addButton.setStyle("-fx-background-color: #99FF99;");
+        deleteButton.setStyle("-fx-background-color: #FF9999;");
+        logoutButton.setStyle("-fx-background-color: #FF9999;");
     }
 
     private void displayCourse(CombinedData newValue) {
@@ -158,8 +118,7 @@ public class UserView implements Initializable {
         table.setItems(tableList);
     }
 
-    // Temporary information to use before loading from database
-    public void updateSelectedItemInfo() {
+    public void updateSidebarInfo() {
         /*
         prereqListView.getItems().addAll(new ArrayList<>(Arrays.asList("AAAA111", "BBBB222", "CCCC333", "DDDD444", "EEEE555","FFFF666")));
         antireqListView.getItems().addAll(new ArrayList<>(Arrays.asList("XXXX123", "YYYY456", "ZZZZ789")));
@@ -172,7 +131,7 @@ public class UserView implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getClassLoader().getResource("interface/loginView.fxml"));
         Parent parent = loader.load();
-        Scene newScene = new Scene(parent);
+        Scene newScene = new Scene(parent, Color.RED);
         Stage userStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         userStage.setScene(newScene);
         userStage.show();
@@ -186,7 +145,7 @@ public class UserView implements Initializable {
         ((AddView)fxmlLoader.getController()).view = this;
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle("Adding Tools");
+        stage.setTitle("Adding Tool");
         stage.show();
     }
 
@@ -198,74 +157,15 @@ public class UserView implements Initializable {
         ((DeleteView)fxmlLoader.getController()).view = this;
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
-        stage.setTitle("Deleting Tools");
+        stage.setTitle("Deleting Tool");
         stage.show();
     }
 
-/*
-    // Runs when the add button is clicked
-    public void add() {
-        if (this.actionGroup.getSelectedToggle().equals(this.departRButton)) {
-            addDepartment();
-        } else if (this.actionGroup.getSelectedToggle().equals(this.programRButton)) {
-            addProgram();
-        } else if (this.actionGroup.getSelectedToggle().equals(this.courseRButton)) {
-            addCourse();
-        }
-    }
-*/
     // Runs when the delete button is clicked
     public void delete() {
+        System.out.println("1");
         CombinedData combinedData = table.getSelectionModel().selectedItemProperty().get();
         DataBase.INSTANCE.removeRelation(combinedData.program, combinedData.course);
         updateTable();
     }
-/*
-    // Runs when the edit button is clicked
-    public void edit() {
-        if (this.actionGroup.getSelectedToggle().equals(this.departRButton)) {
-            editDepartment();
-        } else if (this.actionGroup.getSelectedToggle().equals(this.programRButton)) {
-            editProgram();
-        } else if (this.actionGroup.getSelectedToggle().equals(this.courseRButton)) {
-            editCourse();
-        }
-    }
-
-    public void addDepartment() {
-        System.out.println("Adding Department");
-    }
-
-    public void addProgram() {
-        System.out.println("Adding Program");
-    }
-
-    public void addCourse() {
-        System.out.println("Adding Course");
-    }
-
-    public void deleteDepartment() {
-        System.out.println("Deleting Department");
-    }
-
-    public void deleteProgram() {
-        System.out.println("Deleting Program");
-    }
-
-    public void deleteCourse() {
-        System.out.println("Deleting Course");
-    }
-
-    public void editDepartment() {
-        System.out.println("Editing Department");
-    }
-
-    public void editProgram() {
-        System.out.println("Editing Program");
-    }
-
-    public void editCourse() {
-        System.out.println("Editing Course");
-    }
-    */
 }

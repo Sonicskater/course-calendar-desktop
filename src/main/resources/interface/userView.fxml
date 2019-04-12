@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserView">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.UserView">
    <children>
       <VBox prefHeight="400.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -25,96 +25,123 @@
                         <TableColumn fx:id="courseCol" prefWidth="144.0" text="Course" />
                         <TableColumn fx:id="codeCol" minWidth="5.0" prefWidth="116.0" text="Code" />
                         <TableColumn fx:id="requiredCol" prefWidth="94.0" text="Required" />
-                        <TableColumn fx:id="yearCol" prefWidth="61.0" text="Year" />
+                        <TableColumn fx:id="yearCol" prefWidth="56.0" text="Year" />
                      </columns>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
                   </TableView>
-                  <VBox prefHeight="528.0" prefWidth="253.0" spacing="3.0">
+                  <VBox fx:id="infoPane" prefHeight="528.0" prefWidth="264.0" spacing="3.0">
                      <children>
                         <HBox prefHeight="0.0" prefWidth="228.0" translateY="5.0">
                            <children>
-                              <Label prefHeight="20.0" prefWidth="91.0" text="Course Info" textFill="RED">
+                              <Label prefHeight="20.0" prefWidth="91.0" text="Course Info">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="115.0" text="Log Out" textFill="#00ff40" translateX="20.0" />
+                              <Button fx:id="logoutButton" alignment="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="25.0" prefWidth="115.0" text="Log Out" translateX="20.0">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
                            </children>
                            <effect>
                               <ColorAdjust />
                            </effect>
                         </HBox>
-                        <Label text="Description">
+                        <Label text="Description" textFill="BLUE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
                         <ScrollPane prefHeight="100.0" prefWidth="228.0">
                            <content>
-                              <Label fx:id="courseDesc" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                              <Label fx:id="courseDesc" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" wrapText="true">
+                                 <effect>
+                                    <ColorAdjust />
+                                 </effect></Label>
                            </content>
                            <effect>
-                              <ColorAdjust brightness="0.38" />
+                              <ColorAdjust />
                            </effect>
                         </ScrollPane>
-                        <Label text="Prerequisites">
+                        <Label text="Prerequisites" textFill="BLUE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="prereqListView" prefHeight="100.0" prefWidth="253.0" />
-                        <Label text="Antirequisites">
+                        <ListView fx:id="prereqListView" prefHeight="100.0" prefWidth="253.0">
+                           <effect>
+                              <ColorAdjust />
+                           </effect></ListView>
+                        <Label text="Antirequisites" textFill="BLUE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="antireqListView" prefHeight="100.0" prefWidth="253.0" />
-                        <Label text="Program Info" textFill="RED">
+                        <ListView fx:id="antireqListView" prefHeight="100.0" prefWidth="253.0">
+                           <effect>
+                              <ColorAdjust />
+                           </effect></ListView>
+                        <Label text="Program Info">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label text="Description">
+                        <Label text="Description" textFill="BLUE">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
                         <ScrollPane prefHeight="100.0" prefWidth="228.0">
                            <content>
-                              <Label fx:id="programDesc" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" text="Description Text" wrapText="true" />
+                              <Label fx:id="programDesc" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" prefWidth="202.0" wrapText="true" />
                            </content>
+                           <effect>
+                              <ColorAdjust />
+                           </effect>
                         </ScrollPane>
                      </children>
                      <effect>
-                        <ColorAdjust hue="-0.83" saturation="0.1" />
+                        <ColorAdjust />
                      </effect>
                   </VBox>
                </children>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </HBox>
             <HBox fx:id="facultyPane" alignment="CENTER_LEFT" prefHeight="51.0" prefWidth="1000.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="73.0" prefWidth="739.0" spacing="50.0">
                      <children>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#add" prefHeight="40.0" prefWidth="100.0" text="Add">
+                        <Button fx:id="addButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#add" prefHeight="40.0" prefWidth="100.0" text="Add">
                            <effect>
-                              <ColorAdjust hue="0.57" saturation="0.4" />
+                              <ColorAdjust />
                            </effect>
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </Button>
-                        <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="40.0" prefWidth="100.0" text="Delete">
+                        <Button fx:id="deleteButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delete" prefHeight="40.0" prefWidth="100.0" text="Delete">
                            <effect>
-                              <ColorAdjust contrast="0.05" hue="-0.09" saturation="0.4" />
+                              <ColorAdjust />
                            </effect>
                            <font>
-                              <Font size="16.0" />
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </Button>
                      </children>
                   </HBox>
                </children>
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </HBox>
          </children>
+         <effect>
+            <ColorAdjust />
+         </effect>
       </VBox>
    </children>
 </AnchorPane>

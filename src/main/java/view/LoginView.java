@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import jfxtras.styles.jmetro8.JMetro;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,8 +21,11 @@ public class LoginView implements Initializable {
     private static final int STUDENT = 0;
     private static final int FACULTY = 1;
 
+    @FXML private Button loginButton;
+
     private int userType = -1; // Type of user, either STUDENT or FACULTY
     private String userTypeTitle; // Title of window based on user type
+
     @FXML private AnchorPane root;
     // Username and password fields
     @FXML private TextField userField;
@@ -48,8 +50,8 @@ public class LoginView implements Initializable {
 
         badLogInLabel.setVisible(false); // Don't show login failed message on start
 
-        //Apply 3rd-party theme
         //new JMetro(JMetro.Style.LIGHT).applyTheme(root);
+        loginButton.setStyle("-fx-background-color: #99FF99;");
     }
 
     // Runs when login button is clicked
@@ -72,7 +74,7 @@ public class LoginView implements Initializable {
             this.userTypeTitle = "UWinnipeg Course Manager (Faculty)";
 
             // Authenticates password
-            if (!userField.getText().equals("faculty") || !passField.getText().equals("pass")) {
+            if (!userField.getText().equals("") || !passField.getText().equals("")) {
                 badLogInLabel.setVisible(true); // Display log in error message
             } else {
                 authenticated = true;

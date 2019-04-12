@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginView">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginView">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="300.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +28,7 @@
                   <RadioButton fx:id="studentRButton" mnemonicParsing="false" text="Student" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="150.0" text="Log In" />
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#logIn" prefHeight="25.0" prefWidth="150.0" text="Log In" />
             <Label fx:id="badLogInLabel" prefHeight="37.0" prefWidth="146.0" text="The username or password you provided is incorrect" textAlignment="CENTER" textFill="RED" wrapText="true" />
          </children>
       </VBox>

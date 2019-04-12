@@ -17,42 +17,26 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddView implements Initializable {
+    @FXML ComboBox<Department> departmentComboBox = new ComboBox<>();
+    @FXML ComboBox<Course> reqCourse = new ComboBox<>();
+    @FXML ComboBox<Course> modCourse = new ComboBox<>();
+    @FXML ComboBox<Course> courseToAdd;
+    @FXML ComboBox<Program> programToAddTo;
 
-    @FXML
-    TextField depName;
+    @FXML TextField depName;
+    @FXML TextField progName;
+    @FXML TextArea progDesc;
+    @FXML TextField courseTitle;
+    @FXML TextField courseCode;
+    @FXML TextArea courseDesc;
 
-
-
-    @FXML
-    ComboBox<Department> departmentComboBox = new ComboBox<>();
-
-    @FXML
-    ComboBox<Course> reqCourse = new ComboBox<>();
-
-    @FXML
-    ComboBox<Course> modCourse = new ComboBox<>();
-
-    @FXML
-    ComboBox<Course> courseToAdd;
-
-    @FXML
-    ComboBox<Program> programToAddTo;
-
-    @FXML
-    TextField progName;
-
-    @FXML
-    TextArea progDesc;
-
-    @FXML
-    TextField courseTitle;
-
-    @FXML
-    TextField courseCode;
-
-    @FXML
-    TextArea courseDesc;
-
+    @FXML Button depButton;
+    @FXML Button progButton;
+    @FXML Button reqButton;
+    @FXML Button optButton;
+    @FXML Button courseButton;
+    @FXML Button antiReqButton;
+    @FXML Button preReqButton;
 
     UserView view;
 
@@ -108,7 +92,15 @@ public class AddView implements Initializable {
         modCourse.setButtonCell(courseConverter.call(null));
         modCourse.setCellFactory(courseConverter);
 
-                updateUi();
+        depButton.setStyle("-fx-background-color: #ADD8E6;");
+        progButton.setStyle("-fx-background-color: #ADD8E6;");
+        reqButton.setStyle("-fx-background-color: #FF9999;");
+        optButton.setStyle("-fx-background-color: #99FF99;");
+        courseButton.setStyle("-fx-background-color: #ADD8E6;");
+        antiReqButton.setStyle("-fx-background-color: #FF9999;");
+        preReqButton.setStyle("-fx-background-color: #99FF99;");
+
+        updateUi();
     }
 
 
@@ -258,6 +250,4 @@ public class AddView implements Initializable {
         courseToAdd.setItems(courses);
         modCourse.setItems(courses);
     }
-
-
 }

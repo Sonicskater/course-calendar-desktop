@@ -6,11 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.database.*;
-import model.types.Course;
-import model.types.Department;
-import model.types.Program;
-
-import java.sql.Connection;
 import java.util.Objects;
 
 public class Main extends Application {
