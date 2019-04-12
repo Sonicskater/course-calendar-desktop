@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeleteView">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="258.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.DeleteView">
    <children>
-      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="476.0" prefWidth="258.0" spacing="5.0" AnchorPane.leftAnchor="0.0">
+      <VBox alignment="CENTER" layoutY="-1.0" prefHeight="643.0" prefWidth="258.0" spacing="3.0" AnchorPane.leftAnchor="0.0">
          <children>
             <Label prefHeight="20.0" prefWidth="94.0" text="Delete Course" textAlignment="JUSTIFY">
                <font>
@@ -28,7 +28,7 @@
                <effect>
                   <ColorAdjust />
                </effect></Label>
-            <ComboBox fx:id="courseComboBox" prefHeight="25.0" prefWidth="262.0">
+            <ComboBox fx:id="course" prefHeight="25.0" prefWidth="262.0">
                <effect>
                   <ColorAdjust />
                </effect>
@@ -37,7 +37,7 @@
                <effect>
                   <ColorAdjust />
                </effect></Label>
-            <ComboBox fx:id="programOfCourseComboBox" prefHeight="25.0" prefWidth="262.0">
+            <ComboBox fx:id="programOfCourse" prefHeight="25.0" prefWidth="262.0">
                <effect>
                   <ColorAdjust />
                </effect>
@@ -47,8 +47,77 @@
                   <ColorAdjust />
                </effect>
                <VBox.margin>
-                  <Insets bottom="30.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
+            </Button>
+            <Label prefHeight="20.0" prefWidth="130.0" text="Delete Prerequisite" textAlignment="JUSTIFY">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="273.0" text="Course to Delete From">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Label>
+            <ComboBox fx:id="prereq" prefHeight="25.0" prefWidth="262.0">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ComboBox>
+            <Label prefHeight="17.0" prefWidth="273.0" text="Prerequisites to Delete">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Label>
+            <ComboBox fx:id="prereqOfCourse" prefHeight="25.0" prefWidth="262.0">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ComboBox>
+            <Button fx:id="prereqButton" mnemonicParsing="false" onAction="#deletePrereq" prefHeight="25.0" prefWidth="500.0" text="Delete Prerequisite">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Button>
+            <Label prefHeight="20.0" prefWidth="138.0" text="Delete Antirequisite" textAlignment="JUSTIFY">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="273.0" text="Course to Delete From">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Label>
+            <ComboBox fx:id="antireq" prefHeight="25.0" prefWidth="262.0">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ComboBox>
+            <Label prefHeight="17.0" prefWidth="273.0" text="Antirequisites to Delete">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </Label>
+            <ComboBox fx:id="antireqOfCourse" prefHeight="25.0" prefWidth="262.0">
+               <effect>
+                  <ColorAdjust />
+               </effect>
+            </ComboBox>
+            <Button fx:id="antireqButton" mnemonicParsing="false" onAction="#deleteAntireq" prefHeight="25.0" prefWidth="500.0" text="Delete Antirequisite">
+               <effect>
+                  <ColorAdjust />
+               </effect>
             </Button>
             <Label prefHeight="24.0" prefWidth="131.0" text="Delete Department" textAlignment="JUSTIFY">
                <font>
@@ -60,12 +129,15 @@
                <effect>
                   <ColorAdjust />
                </effect>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </Label>
             <Label prefHeight="17.0" prefWidth="273.0" text="Department to Delete">
                <effect>
                   <ColorAdjust />
                </effect></Label>
-            <ComboBox fx:id="departmentComboBox" prefHeight="25.0" prefWidth="262.0">
+            <ComboBox fx:id="department" prefHeight="25.0" prefWidth="262.0">
                <effect>
                   <ColorAdjust />
                </effect>
@@ -75,7 +147,7 @@
                   <ColorAdjust />
                </effect>
                <VBox.margin>
-                  <Insets bottom="25.0" />
+                  <Insets />
                </VBox.margin>
             </Button>
             <Label prefHeight="20.0" prefWidth="107.0" text="Delete Program" textAlignment="JUSTIFY">
@@ -88,12 +160,15 @@
                <effect>
                   <ColorAdjust />
                </effect>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
             </Label>
             <Label prefHeight="17.0" prefWidth="273.0" text="Program to Delete">
                <effect>
                   <ColorAdjust />
                </effect></Label>
-            <ComboBox fx:id="programComboBox" prefHeight="25.0" prefWidth="262.0">
+            <ComboBox fx:id="program" prefHeight="25.0" prefWidth="262.0">
                <effect>
                   <ColorAdjust />
                </effect>
