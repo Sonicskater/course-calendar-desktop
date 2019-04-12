@@ -74,7 +74,7 @@ public class LoginView implements Initializable {
             this.userTypeTitle = "UWinnipeg Course Manager (Faculty)";
 
             // Authenticates password
-            if (!userField.getText().equals("") || !passField.getText().equals("")) {
+            if (!userField.getText().equals("faculty") || !passField.getText().equals("pass")) {
                 badLogInLabel.setVisible(true); // Display log in error message
             } else {
                 authenticated = true;
