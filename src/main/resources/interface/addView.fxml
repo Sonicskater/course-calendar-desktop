@@ -162,6 +162,11 @@
                                     <ColorAdjust />
                                  </effect>
                               </TextArea>
+                              <TextField fx:id="yearOffered" prefHeight="25.0" prefWidth="200.0" promptText="Year Offered">
+                                 <effect>
+                                    <ColorAdjust />
+                                 </effect>
+                              </TextField>
                               <Button fx:id="courseButton" mnemonicParsing="false" onAction="#addCourse" prefHeight="25.0" prefWidth="500.0" text="Add Course">
                                  <effect>
                                     <ColorAdjust />

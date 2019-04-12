@@ -29,6 +29,7 @@ public class AddView implements Initializable {
     @FXML TextField courseTitle;
     @FXML TextField courseCode;
     @FXML TextArea courseDesc;
+    @FXML TextArea yearOffered;
 
     @FXML Button depButton;
     @FXML Button progButton;

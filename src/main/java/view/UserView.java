@@ -75,6 +75,15 @@ public class UserView implements Initializable {
                 (observable, oldValue, newValue) -> {
             displayCourse((newValue!=null)? newValue : oldValue);
         });
+
+        table.setEditable(true);
+
+//        departmentCol.setEditable(true);
+//        departmentCol.setOnEditCommit(
+//                t -> t.getTableView().getItems().get(
+//                        t.getTablePosition().getRow()).getSelectionModel().getSelectedItem().setValue(t.getNewValue())
+//        );
+
         updateTable();
 
         // Set styling for elements
