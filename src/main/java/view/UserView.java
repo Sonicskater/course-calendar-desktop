@@ -78,12 +78,6 @@ public class UserView implements Initializable {
 
         table.setEditable(true);
 
-//        departmentCol.setEditable(true);
-//        departmentCol.setOnEditCommit(
-//                t -> t.getTableView().getItems().get(
-//                        t.getTablePosition().getRow()).getSelectionModel().getSelectedItem().setValue(t.getNewValue())
-//        );
-
         updateTable();
 
         // Set styling for elements
@@ -125,14 +119,6 @@ public class UserView implements Initializable {
         tableList.addAll(data);
         System.out.println(tableList);
         table.setItems(tableList);
-    }
-
-    public void updateSidebarInfo() {
-        /*
-        prereqListView.getItems().addAll(new ArrayList<>(Arrays.asList("AAAA111", "BBBB222", "CCCC333", "DDDD444", "EEEE555","FFFF666")));
-        antireqListView.getItems().addAll(new ArrayList<>(Arrays.asList("XXXX123", "YYYY456", "ZZZZ789")));
-        descriptionLabel.setText("Introduction into the development and evolution of software. Covers key conceptual foundations as well as key methods and techniques used in the different phases of the software lifecycle. Technologies are selected based on their fitness for purpose towards explicitly stated project objectives for different types of project. Emphasis is on both technical and soft skill needed for high quality software and software-based products developed in teams.");
-        */
     }
 
     // Logs out of account and opens the login screen
