@@ -176,6 +176,7 @@ public class AddView implements Initializable {
             course.setCode(courseCode.getText());
             course.setTitle(courseTitle.getText());
             course.setDescription(courseDesc.getText());
+            course.setYear(Integer.parseInt(yearOffered.getText()));
 
             course.save();
         } catch (IDTypeMismatchExcception idTypeMismatchExcception) {
