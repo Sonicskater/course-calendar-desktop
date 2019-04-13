@@ -29,7 +29,7 @@ public class AddView implements Initializable {
     @FXML TextField courseTitle;
     @FXML TextField courseCode;
     @FXML TextArea courseDesc;
-    @FXML TextField yearOffered;
+    @FXML TextField courseYear;
 
     @FXML Button depButton;
     @FXML Button progButton;
@@ -176,7 +176,7 @@ public class AddView implements Initializable {
             course.setCode(courseCode.getText());
             course.setTitle(courseTitle.getText());
             course.setDescription(courseDesc.getText());
-            course.setYear(Integer.parseInt(yearOffered.getText()));
+            course.setYear(Integer.parseInt(courseYear.getText()));
 
             course.save();
         } catch (IDTypeMismatchExcception idTypeMismatchExcception) {

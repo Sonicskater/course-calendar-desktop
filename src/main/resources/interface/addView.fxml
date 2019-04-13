@@ -165,7 +165,7 @@
                                     <ColorAdjust />
                                  </effect>
                               </TextArea>
-                              <TextField fx:id="yearOffered" prefHeight="25.0" prefWidth="200.0" promptText="Year Offered">
+                              <TextField fx:id="courseYear" prefHeight="25.0" prefWidth="200.0" promptText="Year Offered">
                                  <effect>
                                     <ColorAdjust />
                                  </effect>
